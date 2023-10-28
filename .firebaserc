@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "camera-af868": {
+      "hosting": {
+        "ngWebApp2": [
+          "loream"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "camera-af868"
+  }
+}

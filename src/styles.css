@@ -1,4 +1,588 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+    --blue: #389cff;
+    --deepBlue: #3f51b5;
+    --red: #fc4753;
+    --yellow: #f7bc4e;
+    --green: #88b25b;
+    --white: #ffffff;
+    --lightBlue: #8da9c4;
+    --lightGray: #cccccc;
+    --dark: #4d4d4d;
+
+    --seaSick: #e9e8e2;
+    --sickSea: var(--dark);
+
+    --main: var(--deepBlue);
+    --mainText: var(--seaSick);
+    --sub: #bebebe;
+    --subText: var(--dark);
+
+    --bg: var(--white);
+    --histarri: var(--yellow);
+
+    --title: 24px;
+    --context: 15px;
+    --keyValue: 12px;
+
+    --screenS: 700px;
+    --screenM: 1200px;
+    --screenL: 2000px;
+
+    --imgS: 12px;
+    --imgM: 120px;
+    --imgL: 240px;
+
+    --boxShadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    --boxShadow2: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 1em;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+
+/* itemCard */
+/* itemCard */
+.itemCard {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 1vmin;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    background-color: var(--seaSick);
+    color: var(--dark);
+
+    animation-duration: 4s;
+    transition: 0.25s, width 0s;
+}
+
+.itemCardHeader {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--main);
+    color: var(--white);
+}
+
+.itemCardHeaderTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemCardHeaderControlBar {
+    display: flex;
+    justify-content: end;
+}
+
+.itemCardControlBar {
+    display: flex;
+    justify-content: end;
+}
+
+.itemCardSholder {
+    padding: 0.5%;
+    padding-left: 2%;
+    background-color: var(--sub);
+    font-size: var(--context);
+    color: var(--sickSea);
+    max-height: var(--context);
+}
+
+.itemCardBody {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5%;
+}
+
+/* Itemcard image */
+.itemCardImageFrameList {
+    height: 150px;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    flex-direction: column;
+    overflow-y: scroll;
+    justify-content: space-evenly;
+}
+
+.itemCardImageEditPanel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0px;
+    top: 0px;
+}
+
+.itemCardImage {
+    width: 100%;
+}
+
+.itemCardImageContainer {}
+
+.itemImageFrame {
+    height: 5vh;
+    width: 5vh;
+    margin: 1%;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}
+
+.itemImageFrameImage {
+    width: 100%;
+}
+
+.itemImageFrameImage2 {
+    height: 100%;
+    position: absolute;
+}
+
+.imageFramePannel {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    flex-direction: column;
+}
+
+.itemCardImagePosterFrame {
+    height: var(--imgL);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    overflow: hidden;
+}
+
+
+/* tagList */
+/* tagList */
+.itemCardTagList {
+    display: flex;
+    background-color: var(--sub);
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.itemCardTag {
+    display: inline-block;
+    width: auto;
+    background-color: var(--yellow);
+    border-radius: 3px 6px 4px 3px;
+    position: relative;
+    color: var(--dark);
+    font-weight: bold;
+    font-size: var(--context);
+    line-height: 38px;
+    padding: 0 2% 0 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+}
+
+/*itemCardTag triangle */
+.itemCardTag:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: -19px;
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 19px solid transparent;
+    border-right: 19px solid var(--yellow);
+}
+
+/*itemCardTag circle */
+.itemCardTag:after {
+    content: "";
+    background-color: var(--dark);
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    display: block;
+    top: 17px;
+}
+
+/* text style */
+/* text style */
+.itemCardTitle {
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: center; */
+    align-items: flex-start;
+    font-size: var(--title);
+    height: var(--title);
+    /* text-wrap: nowrapq; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itemCardContent {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--context);
+    padding-left: 0.5%;
+}
+
+.itemCardValue {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--context);
+    padding-left: 0.5%;
+}
+
+.itemCardKeytValue {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-content: center;
+    justify-content: space-around;
+    padding: 1%;
+    font-size: var(--keyValue);
+}
+
+/* lay out*/
+/* lay out*/
+.itemCardGridList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    padding: 2%;
+    justify-items: center;
+    align-items: center;
+}
+.itemCardGrid {
+    display: grid;
+    grid-template-columns: 31% 69%;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1%;
+}
+.itemCardGrid2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 2%;
+}
+.itemCardGrid3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2%;
+}
+.itemCardViewGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    align-items: center;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.25vh 0px 0px;
+}
+
+.itemCardPadding{
+    padding:2% ;
+}
+
+.itemCardMargin{
+    margin:2% ;
+}
+
+/* flex */
+/* flex */
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexAround {
+    display: flex;
+    padding-right: 5%;
+    padding-left: 5%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flexEven {
+    display: flex;
+    padding-right: 5%;
+    padding-left: 5%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.flexList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.flex {
+    display: flex;
+    padding: 2%;
+}
+
+.keyValue {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    align-content: center;
+    justify-content: space-around;
+    /* box-shadow: rgb(51, 51, 51) 0px 0.125rem 3px 0px; */
+    /* margin-bottom: 2%; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* backend */
+
+.itemCardBack {
+    width: 100%;
+    /* min-height: 80px; */
+    background-color: var(--seaSick);
+}
+
+.itemCardBack:before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    border-bottom-left-radius: 50%;
+    background: #000;
+}
+
+
+
+/* buttons  */
+/* buttons  */
+
+/* file upload */
+.fileContext {
+    width: 100%;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    font-size: var(--title);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
+/* image */
+.itemImageButton {
+    border-radius: 5px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark);
+    font-size: var(--context) !important;
+}
+
+.itemImageButton {
+    border: 1px solid #222222;
+    /* background-color: #ffffff; */
+    border-radius: 8px;
+    /* padding: 5%; */
+    margin: 5%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+        transform 0.1s;
+    user-select: none;
+    -webkit-user-select: none;
+    width: auto;
+}
+
+.itemImageButton:focus-visible {
+    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+    transition: box-shadow 0.2s;
+}
+
+.itemImageButton:active {
+    background-color: #f7f7f7;
+    border-color: #000000;
+    transform: scale(0.96);
+}
+
+.itemImageButton:disabled {
+    border-color: #dddddd;
+    color: #dddddd;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+
+.itemButton {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5%;
+    font-size: var(--context);
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+        transform 0.1s;
+    user-select: none;
+    -webkit-user-select: none;
+    width: auto;
+}
+
+.itemButton:active {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+}
+
+.itemButton:focus {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    color: var(--yellow);
+}
+
+.itemButton:hover {
+    background-color: rgba(6, 24, 44, 0.4);
+    border-radius: 100vh;
+    color: var(--yellow);
+}
+
+
+.hClick {
+    all: unset;
+}
+
+.hClick:active {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
+}
+
+.hClick:focus {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
+    color: var(--yellow);
+}
+
+.hClick:hover {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
+}
+
+
+
+
+/* 
+  
+  
+  * {
+   background-color: rgba(255, 0, 0, 0.1);
+  }
+  
+  * * {
+   background-color: rgba(0, 255, 0, 0.1);
+  }
+  
+  * * * {
+   background-color: rgba(0, 0, 255, 0.1);
+  }
+  
+  * * * * {
+   background-color: rgba(255, 0, 255, 0.1);
+  }
+  
+  * * * * * {
+   background-color: rgba(0, 255, 255, 0.1);
+  }
+  
+  * * * * * * {
+   background-color: rgba(255, 255, 0, 0.1);
+  }
+  
+  * * * * * * * {
+   background-color: rgba(255, 0, 0, 0.1);
+  }
+  
+  * * * * * * * * {
+   background-color: rgba(0, 255, 0, 0.1);
+  }
+  
+  * * * * * * * * * {
+   background-color: rgba(0, 0, 255, 0.1);
+  } */
+
+@media only screen and (min-width: 700px) {
+    :root {
+        --title: 12px;
+        --context: 12px;
+        --keyvalue: 9px;
+
+        --imgS: 12px;
+        --imgM: 120px;
+        --imgL: 240px;
+    }
+
+    .itemImageFrame {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    :root {
+        --title: 24px;
+        --context: 15px;
+        --keyvalue: 12px;
+    }
+
+    .itemImageFrame {
+        height: 100px;
+        width: 100px;
+    }
+}
