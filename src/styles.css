@@ -47,12 +47,6 @@ body {
 }
 
 
-body,
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 ::-webkit-scrollbar {
     width: 1em;
@@ -117,36 +111,14 @@ html {
 }
 
 .itemCardBody {
+    position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0.5%;
+    /* padding: 0.5%; */
 }
 
 /* Itemcard image */
-.itemCardImageFrameList {
-    height: 150px;
-    padding: 1%;
-    display: grid;
-    grid-template-columns: repeat(3, 30%);
-    flex-direction: column;
-    overflow-y: scroll;
-    justify-content: space-evenly;
-}
-
-.itemCardImageEditPanel {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    right: 0px;
-    top: 0px;
-}
-
-.itemCardImage {
-    width: 100%;
-}
-
-.itemCardImageContainer {}
-
+/* Itemcard image */
 .itemImageFrame {
     height: 5vh;
     width: 5vh;
@@ -163,11 +135,38 @@ html {
 .itemImageFrameImage {
     width: 100%;
 }
-
 .itemImageFrameImage2 {
     height: 100%;
     position: absolute;
 }
+.itemCardImageFrameList {
+    height: 150px;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    flex-direction: column;
+    overflow-y: scroll;
+    justify-content: space-evenly;
+}
+.itemCardImageEditPanel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0px;
+    top: 0px;
+}
+
+.itemCardImage {
+    width: 100%;
+}
+
+
+
+
+.itemCardImageContainer {}
+
+
+
 
 .imageFramePannel {
     position: absolute;
@@ -242,7 +241,6 @@ html {
 .itemCardTitle {
     display: flex;
     justify-content: flex-start;
-    /* align-items: center; */
     align-items: flex-start;
     font-size: var(--title);
     height: var(--title);
@@ -272,7 +270,6 @@ html {
     grid-template-columns: 30% 70%;
     align-content: center;
     justify-content: space-around;
-    padding: 1%;
     font-size: var(--keyValue);
 }
 
@@ -283,8 +280,6 @@ html {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow-y: hidden;
     overflow-x: hidden;
-
-    padding: 2%;
     justify-items: center;
     align-items: center;
 }
@@ -293,18 +288,22 @@ html {
     grid-template-columns: 31% 69%;
     align-items: center;
     justify-content: space-around;
-    padding: 1%;
+    /* padding: 1%; */
 }
+
 .itemCardGrid2 {
     display: grid;
     grid-template-columns: 50% 50%;
-    padding: 2%;
 }
 .itemCardGrid3 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 2%;
+    grid-template-columns: repeat(3,1fr);
 }
+.itemCardGrid4 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
 .itemCardViewGrid {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
@@ -322,12 +321,20 @@ html {
 
 /* flex */
 /* flex */
+.flexStart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .flexCenter {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+}
 .flexAround {
     display: flex;
     padding-right: 5%;
@@ -349,12 +356,10 @@ html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2%;
 }
 
 .flex {
     display: flex;
-    padding: 2%;
 }
 
 .keyValue {
@@ -377,7 +382,7 @@ html {
     background-color: var(--seaSick);
 }
 
-.itemCardBack:before {
+/* .itemCardBack:before {
     content: "";
     position: absolute;
     top: -40px;
@@ -386,7 +391,7 @@ html {
     width: 40px;
     border-bottom-left-radius: 50%;
     background: #000;
-}
+} */
 
 
 
@@ -429,7 +434,7 @@ html {
     /* background-color: #ffffff; */
     border-radius: 8px;
     /* padding: 5%; */
-    margin: 5%;
+    /* margin: 5%; */
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -572,6 +577,13 @@ html {
         height: 60px;
         width: 60px;
     }
+
+    .itemCardImageFrameContent{
+        display: flex;
+        flex-direction: column;
+        width:auto;
+        overflow: hidden;
+    }
 }
 
 @media only screen and (min-width: 1500px) {
@@ -586,3 +598,5 @@ html {
         width: 100px;
     }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,1 +1,30 @@
-<p>item-card-list works!</p>
+<div class="itemCard itemCardMargin">
+    <div class="itemCardHeader itemCardPadding flexAround">
+        <div>
+            <h2>{{address}}</h2>
+            <button (click)="newItem(address)">add new</button>
+            <button (click)="newTask()" mat-button>
+                <mat-icon>add</mat-icon> Add Task
+            </button>
+        </div>
+
+        <div class="itemCardControlBar">
+            <select [style]="'width:auto'" (change)="selectCollection(selecter.value)" #selecter>
+                <option>items</option>
+                <option>cities</option>
+                <option>test</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- <div class="itemCardBody " (cdkDropListDropped)="drop($event)" cdkDropList>
+        <app-item-card *ngFor="let x of itemArray" [address]="address" [item]="x"></app-item-card>
+    </div> -->
+    <div class="itemCardBody itemCardGrid3" (cdkDropListDropped)="drop($event)" cdkDropList>
+        <app-item-card *ngFor="let x of item$ | async" [address]="address" [item]="x"></app-item-card>
+    </div>
+
+</div>
+
+<!-- <button (click)="openDialog('0ms', '0ms')">Open dialog without animation</button>
+<button (click)="openDialog('3000ms', '1500ms')">Open dialog slowly</button> -->

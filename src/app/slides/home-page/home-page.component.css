@@ -1,0 +1,9 @@
+.itemCardImage{
+    height:100%;
+}
+.itemCardImageFrame{
+    max-height: 50vh;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}

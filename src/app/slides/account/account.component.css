@@ -1,3 +1,20 @@
+.userImageFrame{
+    border-radius: 1000px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 10vmin;
+    height: 10vmin;
+
+    position: relative;
+}
+.userImage{
+    width: 100%;
+}
+
+
 .gsi-material-button {
     -moz-user-select: none;
     -webkit-user-select: none;

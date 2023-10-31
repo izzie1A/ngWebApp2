@@ -1,27 +1,16 @@
-<div class="itemCard itemCardMargin">
+<div class="itemCard itemCardMargin" *ngIf="(this.authS.authState$ | async) === null">
     <div class="itemCardHeader itemCardPadding">
-        <b>account works!</b>
+        <b>Account</b>
     </div>
     <div class="itemCardBody">
-        <div class="itemCardGrid">
-            <p>account works!</p>
-            <p>account works!</p>
-        </div>
-        <div class="itemCardGrid2">
-            <p>account works!</p>
-            <p>account works!</p>
-        </div>
         <div class="itemCardGrid3">
-            <p>account works!</p>
-            <p>account works!</p>
+            <p>Email Sign in</p>
+            <button>Sign in with email</button>
 
             <p>Google Sign in</p>
-            <!-- <button class="flexCenter " *ngIf="(this.authS.authState$ | async) === null"
-                (click)="this.authS.googleSignin()">
-                <p>Google Sign in</p>
-                <span class="material-symbols-outlined ">LogIn</span>
-            </button> -->
-            <button class="gsi-material-button" (click)="this.authS.googleSignin()" *ngIf="(this.authS.authState$ | async) === null">
+
+            <button class="gsi-material-button" (click)="this.authS.googleSignin()"
+                *ngIf="(this.authS.authState$ | async) === null">
                 <div class="gsi-material-button-state"></div>
                 <div class="gsi-material-button-content-wrapper">
                     <div class="gsi-material-button-icon">
@@ -52,24 +41,48 @@
 </div>
 
 
-<div class="itemCard" *ngIf="this.authS.user$ |async as user">
-    <div class="itemCardHeader flexAround">
-        <a>{{user.displayName}}</a>
+<div class="itemCard itemCardMargin " *ngIf="this.authS.user$ |async as user">
+    <div class="itemCardHeader flexAround itemCardPadding">
+        <b>{{user.displayName}}</b>
         <div class="itemCardHeaderControlBar">
-            <button (click)="this.authS.signout()" class="flexAround">
+            <button (click)="this.authS.signout()" class="itemButton flexAround">
                 <span class="material-symbols-outlined ">LogOut</span>
-                LogOut
             </button>
         </div>
     </div>
     <div class="itemCardSholder">
     </div>
 
-    <div class="keyValue">
-        <img src={{user.photoURL}} id="userImage" alt="img">
-        <h6> {{user.displayName}}</h6>
+    <div class="itemCardBody ">
+        <div class="flex itemCardPadding flexStart" > 
+            <div class="userImageFrame ">
+                <img src={{user.photoURL}} class="userImage" alt="img">
+            </div>
+            <div class="itemCardPadding">
+                <h3> Good morning </h3>
+                <h2> {{user.displayName}}</h2>
+            </div>
+        </div>
+        <div class="flexAround itemCardPadding">
+            <button (click)="this.authS.signout()" class=" itemImageButton flexAround">
+                <span class="material-symbols-outlined ">LogOut</span>
+                LogOut
+            </button>
+            <div></div>
+        </div>
     </div>
 
-    <div class="itemCardBack">
+    <div class="itemCardBack ">
+        <div></div>
     </div>
+</div>
+
+<div class="itemCard itemCardMargin">
+    <div class="itemCardHeader itemCardPadding">
+        <b>Message</b>
+    </div>
+    <div class="itemCardBody itemCardPadding">
+        <p>Message</p>
+    </div>
+    
 </div>

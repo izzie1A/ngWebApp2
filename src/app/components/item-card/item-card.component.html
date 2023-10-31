@@ -1,1 +1,97 @@
-<p>item-card works!</p>
+<div class="itemCard itemCardMargin" cdkDrag>
+    <div class="itemCardHeader flexBetween">
+        <div></div>
+        <div class="itemCardImageFrameContent2 itemCardPadding ">
+            <button class="itemButton">
+                <span class="material-symbols-outlined">
+                    edit
+                </span>
+            </button>
+            <button class="itemButton">
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
+            </button>
+            <button class="itemButton">
+                <span class="material-symbols-outlined">
+                    expand
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <div id="viewmode1">
+        <div class="itemCardBody flex">
+
+            <div class="itemCardImageFrame flexCenter">
+                <img class="itemCardImage" src="{{item}}">
+            </div>
+            <div class="x">
+                <div class="itemCardImageFrameContent3 itemCardPadding ">
+                    <button class="itemButton">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </button>
+                    <div class="flex">
+                        <button class="itemButton">
+                            <span class="material-symbols-outlined">
+                                expand
+                            </span>
+                        </button>
+                        <button class="itemButton">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="itemCardImageFrameContent itemCardPadding ">
+                    <div *ngFor="let x of item|keyvalue" class="itemCardGrid">
+                        <a class="">{{x.key}}</a>
+                        <a>{{x.value}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class=" flexBetween">
+            <button (click)="deleteFile(address,item.id)">del</button>
+            <button (click)="deleteFile(address,item.id)">del</button>
+        </div> -->
+    </div>
+    <!-- <div id="viewmode1">
+        <div class="itemCardBody flex  ">
+            <div class="x">
+                <div class="itemCardImageFrame flexCenter">
+                    <img class="itemCardImage" src="{{item}}">
+                </div>
+
+                <div class="itemCard">
+                    <div [style]="'width:10ch;'">
+                        <button (click)="deleteFile(address,item.id)">del</button>
+                        <p [style]="''" >{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+
+    <!-- <div class="itemCardBack">
+        <div class="collapesable itemCardPadding">
+            <label for="my_checkbox">Show/hide</label>
+            <input type="checkbox" id="my_checkbox" style="display:none;">
+            <div id="hidden">
+                <div *ngFor="let x of item|keyvalue" class="itemCardKeytValue">
+                    <div>
+                        {{x.key}}
+                    </div>
+                    <div>
+                        {{x.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

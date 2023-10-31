@@ -18,6 +18,7 @@ export class NavBarComponent {
     this.itemArray.push(new navItem('Home','home','home'));
     this.itemArray.push(new navItem('Account','account','account'));
     this.itemArray.push(new navItem('Setting','setting','setting'));
+    this.itemArray.push(new navItem('Neeeew :-)','pageControl','pageControl'));
   }
   expanNavbar(inputDiv: any,triggerArea:any) {
     inputDiv.style.height = this.navExpanded ? '0px' : 'auto';

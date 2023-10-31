@@ -1,1 +1,13 @@
-<p>home-page works!</p>
+<div class="" [style]="'padding-left:10%;padding-right:10%;'">
+    <div class="itemCard itemCardMargin" *ngFor=" let x of itemArray">
+        <div class="itemCardBody">
+            <div class="itemCardImageFrame" *ngFor=" let y of x.imageArray">
+                <img src="{{y}}" class="itemCardImage">
+            </div>
+        </div>
+        <div class="itemCardHeader itemCardPadding">
+            <p>{{x.name}}</p>
+        </div>
+    </div>
+
+</div>
