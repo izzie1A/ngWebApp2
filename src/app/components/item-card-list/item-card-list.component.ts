@@ -58,7 +58,8 @@ export class ItemCardListComponent {
 
   newTask(): void {
     const dialogRef = this.dialog.open(ItemCardDialogComponent, {
-      width: '270px',
+      width: '50vw',
+      height: '50vh',
       data: {
         task: {
           name: 'testing',

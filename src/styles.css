@@ -44,6 +44,7 @@ body {
 
     --boxShadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     --boxShadow2: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    --boxShadow3: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 
@@ -119,6 +120,22 @@ body {
 
 /* Itemcard image */
 /* Itemcard image */
+.itemCardImgFrame {
+    /* height: 50%; */
+    /* width: auto; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* background-color: red; */
+    box-shadow: var(--boxShadow3)
+}
+
+.itemCardImg {
+    height: auto;
+    width: 100%;
+}
+
 .itemImageFrame {
     position: relative;
     height: 5vh;
@@ -136,11 +153,13 @@ body {
 .itemImageFrameImage {
     width: 100%;
 }
+
 .itemImageFrameImage2 {
     height: 100%;
     position: absolute;
     opacity: 0.5;
 }
+
 .itemCardImageFrameList {
     height: 150px;
     padding: 1%;
@@ -150,6 +169,7 @@ body {
     overflow-y: scroll;
     justify-content: space-evenly;
 }
+
 .itemCardImageEditPanel {
     position: absolute;
     display: flex;
@@ -285,6 +305,7 @@ body {
     justify-items: center;
     align-items: center;
 }
+
 .itemCardGrid {
     display: grid;
     grid-template-columns: 31% 69%;
@@ -295,12 +316,14 @@ body {
 
 .itemCardGrid2 {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 1fr);
 }
+
 .itemCardGrid3 {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
+
 .itemCardGrid4 {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -313,12 +336,12 @@ body {
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0.25vh 0px 0px;
 }
 
-.itemCardPadding{
-    padding:2% ;
+.itemCardPadding {
+    padding: 2%;
 }
 
-.itemCardMargin{
-    margin:2% ;
+.itemCardMargin {
+    margin: 2%;
 }
 
 /* flex */
@@ -328,15 +351,18 @@ body {
     justify-content: flex-start;
     align-items: center;
 }
+
 .flexCenter {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .flexBetween {
     display: flex;
     justify-content: space-between;
 }
+
 .flexAround {
     display: flex;
     padding-right: 5%;
@@ -580,10 +606,10 @@ body {
         width: 60px;
     }
 
-    .itemCardImageFrameContent{
+    .itemCardImageFrameContent {
         display: flex;
         flex-direction: column;
-        width:auto;
+        width: auto;
         overflow: hidden;
     }
 }
@@ -600,5 +626,13 @@ body {
         width: 100px;
     }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

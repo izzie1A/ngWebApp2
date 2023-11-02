@@ -1,68 +1,78 @@
-<div>
-    <a>Name</a>
-    <input [(ngModel)]="data.task.name">
-</div>
-<div>
-    <a>description</a>
-    <input [(ngModel)]="data.task.description">
-</div>
+<div class="itemCard">
+    <div class="itemCardHeader">
+        asd
+    </div>
+    <div class="itemCArdBody">
+        <div class="itemCardGrid2">
+            <a>Name</a>
+            <input [(ngModel)]="data.task.name">
 
-<!-- imageArray -->
-<!-- imageArray -->
-<div class="itemCardImageContainer itemCardKeytValue" *ngIf="data.task.imageArray!!">
-    <a class="itemCardContent"> Image list</a>
-    <div class="itemCardImageFrameList">
-        <div class="flexList">
-            <button class="upload-btn-wrapper ">
-                <span class="material-symbols-outlined">cloud_upload</span>
-                <input class="fileInput" type="file"
-                    (change)="onFileArrayPush( 'yungFolder/','imageArray',imgListImgInput);" multiple #imgListImgInput>
-            </button>
-            <a class="itemCardContent">Upload</a>
+            <a>description</a>
+            <input [(ngModel)]="data.task.description">
         </div>
 
+        <!-- image -->
+        <!-- image -->
+        <div class="itemCardImageContainer itemCardKeytValue">
+            <div class="flexList">
+                <a class="itemCardContent">Image</a>
+                <button class="upload-btn-wrapper ">
+                    <span class="material-symbols-outlined">
+                        cloud_upload
+                    </span>
+                    <input class="fileInput" type="file"
+                        (change)="onImageSelect( 'loreamFolder/','imageArray',imgListInput);" #imgListInput>
+                </button>
+            </div>
+            <div class="itemCardImgFrame itemCardMargin" [style]="'max-height:50vh;'">
+                <img class="itemCardImg" src="{{data.task.image}}">
+                <!-- <img class="itemImageFrameImage" src="{{data.task.image}}"> -->
+            </div>
+        </div>
+        <!-- image -->
+        <!-- image -->
 
-            <div *ngFor="let x of data.task.imageArray ; let i = index" [style]="'display:flex;'">
-                <div class="itemImageFrame">
-                    <div class="itemCardImageEditPanel">
-                        <button class="material-symbols-outlined itemImageButton"
-                            (click)="onFileDelete($event,data.task,'imageArray',i)">delete</button>
+        <!-- imageArray -->
+        <!-- imageArray -->
+        <div class="itemCardImageContainer itemCardKeytValue" *ngIf="data.task.imageArray!!">
+            <div class="flexList">
+                <a class="itemCardContent"> Image list</a>
+                <button class="upload-btn-wrapper ">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <input class="fileInput" type="file"
+                    (change)="onFileArrayPush( 'loreamFolder/','imageArray',imgListImgInput);" multiple
+                    #imgListImgInput>
+                </button>
+                <a class="itemCardContent">Upload</a>
+            </div>
+            <div class="itemCardImageFrameList">
+                <div *ngFor="let x of data.task.imageArray ; let i = index" [style]="'display:flex;'">
+                    <div class="itemImageFrame">
+                        <div class="itemCardImageEditPanel">
+                            <button class="material-symbols-outlined itemImageButton"
+                                (click)="onFileDelete($event,data.task,'imageArray',i)">delete</button>
+                        </div>
+                        <img class="itemImageFrameImage" src="{{x}}">
                     </div>
-                    <img class="itemImageFrameImage" src="{{x}}">
                 </div>
             </div>
+        </div>
+        <!-- imageArray -->
+        <!-- imageArray -->
+
     </div>
 </div>
-<!-- imageArray -->
-<!-- imageArray -->
+<div class="itemCard">
 
-<!-- image -->
-<!-- image -->
-<div class="itemCardImageContainer itemCardKeytValue">
-    <div class="flexList">
-        <a class="itemCardContent">Image</a>
-        <button class="upload-btn-wrapper ">
-            <span class="material-symbols-outlined">
-                cloud_upload
-            </span>
-            <input class="fileInput" type="file" (change)="onImageSelect( 'yungFolder/','imageArray',imgListInput);"
-                #imgListInput>
+
+
+    <div mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="{ task: data.task }">OK</button>
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button *ngIf="data.enableDelete" mat-fab color="primary" aria-label="Delete"
+            [mat-dialog-close]="{ task: data.task, delete: true }">
+            <mat-icon>delete</mat-icon>
         </button>
+        <button mat-button [mat-dialog-close]="{ task: data.task, delete: true }"> delete</button>
     </div>
-    <div class=" ">
-        <img class="itemImageFrameImage" src="{{data.task.image}}">
-        <!-- <img class="itemImageFrameImage" src="{{data.task.image}}"> -->
-    </div>
-</div>
-<!-- image -->
-<!-- image -->
-
-<div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="{ task: data.task }">OK</button>
-    <button mat-button (click)="cancel()">Cancel</button>
-    <button *ngIf="data.enableDelete" mat-fab color="primary" aria-label="Delete"
-        [mat-dialog-close]="{ task: data.task, delete: true }">
-        <mat-icon>delete</mat-icon>
-    </button>
-    <button [mat-dialog-close]="{ task: data.task, delete: true }" > delete</button>
 </div>

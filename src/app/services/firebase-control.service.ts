@@ -247,7 +247,6 @@ export class FirebaseControlService {
   async tt(url: string, files: any) {
     const storageRef = ref(getStorage(), url);
     const uploadTask = uploadBytesResumable(storageRef, files);
-    // return uploadTask;
     return uploadTask.then((snapshotx) => {
       return getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         return downloadURL.toString();
@@ -261,38 +260,12 @@ export class FirebaseControlService {
     let url = address + input.value.split("\\").pop();
     const storageRef = ref(getStorage(), url);
     const uploadTask = uploadBytesResumable(storageRef, files[0]);
-    // return uploadTask;
     return uploadTask.then((snapshotx) => {
-      console.log('Uploaded an array!');
       return getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         // console.log('File available at', downloadURL);
-        // return downloadURL;
         return downloadURL.toString();
       });
-      // console.log(x); 
     });
-
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
-            break;
-          case 'running':
-            console.log('Upload is running');
-            break;
-          case 'success':
-            break;
-        }
-        return
-      },
-      (error) => {
-        console.log(error);
-        return error
-      }
-    )
   }
 }
 
