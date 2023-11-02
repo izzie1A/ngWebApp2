@@ -120,6 +120,7 @@ body {
 /* Itemcard image */
 /* Itemcard image */
 .itemImageFrame {
+    position: relative;
     height: 5vh;
     width: 5vh;
     margin: 1%;
@@ -138,6 +139,7 @@ body {
 .itemImageFrameImage2 {
     height: 100%;
     position: absolute;
+    opacity: 0.5;
 }
 .itemCardImageFrameList {
     height: 150px;

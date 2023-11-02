@@ -14,34 +14,52 @@ export class FirebaseControlService {
   firebaseServerResponse: any;
 
   constructor() {
-    this.createDoc("test");
+    this.getCustomFile()
   }
 
-  getCustomFile(){
-    const item = new fItem("test", "test");
+  async docSave(address: string, id: string, content: any) {
+    const docRef = doc(this.firestore, address, id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document exist data:", docSnap.data());
+      this.updateDoc(address, id, content)
+    } else {
+      console.log("No such document! now create");
+      console.log(address, content);
+      await setDoc(doc(this.firestore, docRef.path), content);
+      // const docRef = await addDoc(collection(this.firestore, address), content);
+      // console.log("Document written with ID: ", docRef.id);
+    }
+  }
+  getCustomFile() {
     const content = {
-      id: item.id,
-      name: item.name,
-      createTime: item.createTime,
-      tagArray :[],
-      order:0,
-      media: {
-        imagefile: item.imagefile,
-        imageArray: item.imageArray,
-      },
-      metaData: {
-        createBy: 'anno',
-        createTime: item.createTime,
-      },
+      id: "test",
+      name: "test",
+      description: "description",
+      createTime: Date.now(),
+      createBy: 'anno',
+      tagArray: [],
+      imageArray: [this.ranPic()],
+      image: "",
     };
+    content.imageArray.push(this.ranPic());
+    content.image = this.ranPic();
+
     return content
   }
-  
-  // firestore curd
-  async createDoc(address: string) {
-    // const content = new fItem("test","test");
-    const content = this.getCustomFile();
+  ranInt() {
+    return (Math.floor(Math.random() * 10) + 1).toString();
+  }
+  ranPic() {
+    let r = (Math.floor(Math.random() * 10) + 1).toString();
+    let rx = (Math.floor(Math.random() * 10) + 1).toString();
+    let img = "https://picsum.photos/" + r + "00/" + rx + "00";
+    return img;
+  }
 
+  // firestore curd
+  async createCustomDoc(address: string, file: any) {
+    const content = file;
     const docRef = await addDoc(collection(this.firestore, address), content);
     content.id = docRef.id;
     const docSnap = await getDoc(docRef);
@@ -53,14 +71,26 @@ export class FirebaseControlService {
       console.warn("doc create error!");
     }
   }
-
+  async createDoc(address: string) {
+    // const content = new fItem("test","test");
+    const content = this.getCustomFile();
+    const docRef = await addDoc(collection(this.firestore, address), content);
+    content.id = docRef.id;
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await setDoc(doc(this.firestore, docRef.path), content);
+      let x = await this.readDoc(address, docRef.id);
+      console.log(x);
+    } else {
+      console.warn("doc create error!");
+    }
+  }
   async updateDoc(address: string, id: string, content: any) {
     const docRef = await doc(this.firestore, address, id);
     const result = await updateDoc(docRef, content);
     console.log(result);
     return result
   }
-
   async readDoc(address: string, id: string) {
     const docRef = await doc(this.firestore, address, id);
     try {
@@ -77,24 +107,11 @@ export class FirebaseControlService {
       }
       return e
     }
-
   }
   async deleteDoc(address: string, id: string) {
-    console.log(address, id);
-    await deleteDoc(doc(this.firestore, address, id));
-    await console.log(deleteDoc(doc(this.firestore, address, id)));
+    return await deleteDoc(doc(this.firestore, address, id.toString()));
   }
-  async docSave(address: string, id: string, content: any) {
-    const docSnap = await getDoc(doc(this.firestore, address, id));
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      this.updateDoc(address, id, content)
-    } else {
-      console.log("No such document! now create");
-      const docRef = await addDoc(collection(this.firestore, address), content);
-      console.log("Document written with ID: ", docRef.id);
-    }
-  }
+
 
   // customObject uncompleted
   async setCustomFile(address: string, id: string) {
@@ -116,7 +133,6 @@ export class FirebaseControlService {
     const ref = doc(this.firestore, address, id).withConverter(tItemConverter);
     await setDoc(ref, x);
   }
-
   async addCustomFile(address: string) {
     let x = new tItem('undefinded', 'undefined');
     // :any potential threth
@@ -138,7 +154,7 @@ export class FirebaseControlService {
   }
 
   // collection
-  t(address: string){
+  t(address: string) {
     // const itemCollection = collection(this.firestore, 'items');
     // return collectionData(itemCollection);
     // const itemCollection = collection(this.firestore, 'items');
@@ -197,16 +213,13 @@ export class FirebaseControlService {
 
 
   // file storage
-  async fireStorageUploadFile(address: string, input: HTMLInputElement) {
+  async onFilePush(address: string, key: any, input: HTMLInputElement) {
     if (!input.files) return
     const files: FileList = input.files;
-    // let fileName = input.value.split("\\").pop();
     let url = address + input.value.split("\\").pop();
-    // console.log(address + fileName)
-    const storage = getStorage();
-    // const storage = getStorage();
     const storageRef = ref(getStorage(), url);
     const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    console.log(files.length);
     uploadTask.on('state_changed',
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -230,6 +243,57 @@ export class FirebaseControlService {
     )
   }
 
+
+  async tt(url: string, files: any) {
+    const storageRef = ref(getStorage(), url);
+    const uploadTask = uploadBytesResumable(storageRef, files);
+    // return uploadTask;
+    return uploadTask.then((snapshotx) => {
+      return getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        return downloadURL.toString();
+      });
+    });
+  }
+
+  async fireStorageUploadFile(address: string, input: HTMLInputElement) {
+    if (!input.files) return ""
+    const files: FileList = input.files;
+    let url = address + input.value.split("\\").pop();
+    const storageRef = ref(getStorage(), url);
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    // return uploadTask;
+    return uploadTask.then((snapshotx) => {
+      console.log('Uploaded an array!');
+      return getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        // console.log('File available at', downloadURL);
+        // return downloadURL;
+        return downloadURL.toString();
+      });
+      // console.log(x); 
+    });
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+          case 'success':
+            break;
+        }
+        return
+      },
+      (error) => {
+        console.log(error);
+        return error
+      }
+    )
+  }
 }
 
 
@@ -247,13 +311,25 @@ export class tItem implements firebaseFile {
   }
 }
 
-class fItem extends tItem {
-  imagefile: any = [];
+export class fItem extends tItem {
+  name: string = "";
+  description: string = "";
+  image: string = "";
   imageArray: string[] = [];
   createTime: number = Date.now();
-  name: string;
+
   constructor(name: string, id: string) {
     super(name, id);
     this.name = name;
   }
+}
+
+class Media {
+  imageURL: string = "https://picsum.photos/200/300";
+  imageUrlArray: string[] = [this.imageURL];
+}
+
+class MetaData {
+  createBy: string = 'anno';
+  createTime: number = Date.now();
 }

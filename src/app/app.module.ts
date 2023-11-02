@@ -27,12 +27,12 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -47,9 +47,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SettingComponent,
     AccountComponent,
     PageControlComponent,
-    
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -62,7 +59,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    
+
     // provideFirebaseApp(() => initializeApp({ "projectId": "camera-af868", "appId": "1:129701599624:web:f82d68526c4342ca7f823d", "databaseURL": "https://camera-af868-default-rtdb.firebaseio.com", "storageBucket": "camera-af868.appspot.com", "locationId": "us-central", "apiKey": "AIzaSyAn4xbkq-uPWA7PZzbfJO1FJv1AWvrmYLY", "authDomain": "camera-af868.firebaseapp.com", "messagingSenderId": "129701599624", "measurementId": "G-LEX6P2PGG9" })),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
@@ -74,7 +71,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,
     DragDropModule,
     MatDialogModule,
-    
+    FormsModule,
+
   ],
   providers: [
     ScreenTrackingService,

@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { FirebaseControlService } from "src/app/services/firebase-control.service";
 import { AuthService } from "src/app/services/auth.service";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { ItemCardDialogComponent, TaskDialogResult } from './../../components/item-card-dialog/item-card-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-item-card',
@@ -19,12 +21,13 @@ export class ItemCardComponent {
   saved: boolean = false;
   backupItem: any;
 
-  constructor(public fbS: FirebaseControlService, public afs: AuthService) {
+  constructor(public fbS: FirebaseControlService, public afs: AuthService, public dialog: MatDialog) {
     this.backupItem = this.item;
   }
 
   // controrl
   deleteFile(address: string, id: string) {
+    console.warn(address, id)
     this.fbS.deleteDoc(address, id);
   }
   // controrl
@@ -70,7 +73,6 @@ export class ItemCardComponent {
   }
 
   // keyvalue edit
-
   localAddField(key: any, value: any) {
     this.item[key] = value;
   }
@@ -103,7 +105,6 @@ export class ItemCardComponent {
 
 
   onFileSelected(event: any, ref: any, key: any) {
-
   }
   onFilePush(event: any, ref: any, key: any) {
     const file: File = event.target.files[0];
@@ -213,4 +214,59 @@ export class ItemCardComponent {
     this.item[key][index] = null
     console.log(ref[key])
   }
+
+
+  newTask(): void {
+    const dialogRef = this.dialog.open(ItemCardDialogComponent, {
+      width: '270px',
+      data: {
+        task: {},
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult | undefined) => {
+        if (!result) {
+          return;
+        }
+        console.warn(result.task)
+        // this.todo.push(result.task);
+      });
+  }
+
+  editTask(): void {
+    const dialogRef = this.dialog.open(ItemCardDialogComponent, {
+      width: '50vh',
+      data: {
+        task: {
+          id: this.item.id,
+          name: this.item.name.toString(),
+          description: this.item.description,
+          imageArray: this.item.imageArray,
+          image: this.item.image,
+        },
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult) => {
+        if (!result) {
+          return;
+        } else {
+          if (result.delete) {
+            this.fbS.deleteDoc(this.address,this.item.id)            
+          }
+          let x = this.fbS.getCustomFile();
+          x.id = result.task.id;
+          x.name = result.task.name;
+          x.description = result.task.description;
+          x.image = result.task.image;
+          x.imageArray = result.task.imageArray;
+          this.fbS.updateDoc(this.address, x.id, x);
+        }
+      });
+
+  }
+
 }

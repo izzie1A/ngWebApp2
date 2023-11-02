@@ -1,20 +1,21 @@
 <div class="itemCard itemCardMargin" cdkDrag>
-    <div class="itemCardHeader flexBetween">
-        <div></div>
-        <div class="itemCardImageFrameContent2 itemCardPadding ">
+    <div class="itemCardHeader flexBetween" cdkDragHandle>
+        <div>
             <button class="itemButton">
+                <span class="material-symbols-outlined">
+                    drag_handle
+                </span>
+            </button>
+        </div>
+        <div class="itemCardImageFrameContent2 itemCardPadding ">
+            <button class="itemButton" (click)="editTask()">
                 <span class="material-symbols-outlined">
                     edit
                 </span>
             </button>
-            <button class="itemButton">
+            <button class="itemButton" (click)="deleteFile(address,item.id)">
                 <span class="material-symbols-outlined">
                     delete
-                </span>
-            </button>
-            <button class="itemButton">
-                <span class="material-symbols-outlined">
-                    expand
                 </span>
             </button>
         </div>
@@ -22,13 +23,13 @@
 
     <div id="viewmode1">
         <div class="itemCardBody flex">
-
             <div class="itemCardImageFrame flexCenter">
-                <img class="itemCardImage" src="{{item}}">
+                <img class="itemImageFrameImage2" src="{{item.image}}">
+                <img class="itemCardImage" src="{{item.image}}">
             </div>
             <div class="x">
                 <div class="itemCardImageFrameContent3 itemCardPadding ">
-                    <button class="itemButton">
+                    <button class="itemButton" (click)="deleteFile(address,item.id)">
                         <span class="material-symbols-outlined">
                             delete
                         </span>
@@ -39,18 +40,31 @@
                                 expand
                             </span>
                         </button>
-                        <button class="itemButton">
+                        <button class="itemButton" (click)="editTask()">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
                         </button>
                     </div>
                 </div>
-
                 <div class="itemCardImageFrameContent itemCardPadding ">
-                    <div *ngFor="let x of item|keyvalue" class="itemCardGrid">
-                        <a class="">{{x.key}}</a>
-                        <a>{{x.value}}</a>
+                    <div *ngFor="let x of item|keyvalue" class="y">
+                        <div *ngIf="
+                        x.key != 'id' &&
+                        x.key != 'metaData' &&
+                        x.key != 'media' &&
+                         x.key != 'image' &&
+                         x.key != 'tagArray' &&
+                         x.key != 'imageArray'  
+                         ;" class="y">
+                            <b class="">{{x.key}}</b>
+                            <a>{{x.value}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="itemCard flexEven">
+                    <div class="itemImageFrame" *ngFor="let x of item.imageArray">
+                        <img class="itemImageFrameImage" [src]="x">
                     </div>
                 </div>
             </div>

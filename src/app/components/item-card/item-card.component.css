@@ -15,12 +15,19 @@
     max-width: 60vh;
     height: 50vw;
     max-height: 50vh;
-    background-color: #389cff;
+    /* background-color: #389cff; */
+    background-color: var(--sub);
     z-index: 1;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .itemCardImageFrameContent {
-    display: flex;
+    /* display: flex; */
 }
 
 .itemCardImageFrameContent2 {
@@ -40,7 +47,10 @@
     width: calc(100% - 50vh);
     z-index: 0;
 }
-
+.y{
+    display: flex;
+    flex-direction: column;
+}
 .itemCardImageFrameContent3 {
     display: none;
 }
@@ -48,8 +58,9 @@
 @media only screen and (min-width: 700px) {
     .itemCardImageFrameContent {
         /* flex-direction: column; */
-        width: auto;
-        overflow: hidden;
+        /* width: auto; */
+        /* overflow: hidden; */
+        display: flex;
     }
 
     .itemCardImageFrameContent2 {

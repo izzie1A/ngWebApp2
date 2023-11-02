@@ -20,7 +20,8 @@
     <!-- <div class="itemCardBody " (cdkDropListDropped)="drop($event)" cdkDropList>
         <app-item-card *ngFor="let x of itemArray" [address]="address" [item]="x"></app-item-card>
     </div> -->
-    <div class="itemCardBody itemCardGrid3" (cdkDropListDropped)="drop($event)" cdkDropList>
+    
+    <div class="itemCardBody "  #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"  (cdkDropListDropped)="drop($event)" cdkDropList>
         <app-item-card *ngFor="let x of item$ | async" [address]="address" [item]="x"></app-item-card>
     </div>
 
