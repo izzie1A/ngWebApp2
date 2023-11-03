@@ -22,11 +22,11 @@ export class FirebaseControlService {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("Document exist data:", docSnap.data());
-      this.updateDoc(address, id, content)
+      return await this.updateDoc(address, id, content)
     } else {
       console.log("No such document! now create");
       console.log(address, content);
-      await setDoc(doc(this.firestore, docRef.path), content);
+      return await setDoc(doc(this.firestore, docRef.path), content);
       // const docRef = await addDoc(collection(this.firestore, address), content);
       // console.log("Document written with ID: ", docRef.id);
     }

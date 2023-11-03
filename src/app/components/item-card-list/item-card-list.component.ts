@@ -14,21 +14,39 @@ import { signInWithEmailAndPassword } from '@angular/fire/auth';
   styleUrls: ['./item-card-list.component.css']
 })
 export class ItemCardListComponent {
-  @Input() address: string = 'citiesloreamCollection';
+  @Input() address: string = 'loreamFolder';
 
   item$: Observable<any[]> | undefined;
   itemArray$: Observable<any>[] = [];
 
   itemArray: any = [];
+  receivedValue: string = '';
+
   constructor(private fbS: FirebaseControlService, public dialog: MatDialog) {
-    this.initialize();
+    this.item$ = fbS.t(this.address);
   }
 
-  async initialize() {
-    this.item$ = this.fbS.t(this.address);
-    // let x = await this.fbS.queryCondition(this.address, 100, "name", "!=", 'null');
-    // console.log(x);
-    // this.itemArray = x;
+  async addItem(newItem: number , num: number) {
+    let resultPack: string | any[] = [];
+    let sub = this.item$?.subscribe((result) => {
+      resultPack = result;
+      if (num + newItem < 0 || num + newItem > resultPack.length - 1) {
+        return
+      } else {
+        let item = resultPack[num];
+        let item2 = resultPack[num + newItem];
+        let x = item.id;
+        item.id = item2.id;
+        item2.id = x;
+        this.fbS.docSave(this.address, item2.id.toString(), item2);
+        this.fbS.docSave(this.address, item.id.toString(), item);
+        sub?.unsubscribe();
+        return
+      }
+    })
+  }
+
+  dropMove(direction: number) {
   }
 
   drop(event: CdkDragDrop<any[]> | any): void {
@@ -38,8 +56,6 @@ export class ItemCardListComponent {
       }
       const item = event.previousContainer.data[event.previousIndex];
       const item2 = event.container.data[event.currentIndex];
-      // this.fbS.deleteDoc(event.previousContainer.id,item2.id.toString());
-      // this.fbS.deleteDoc(event.previousContainer.id,item.id.toString());
       let x = item.id;
       item.id = item2.id;
       item2.id = x;
@@ -58,8 +74,8 @@ export class ItemCardListComponent {
 
   newTask(): void {
     const dialogRef = this.dialog.open(ItemCardDialogComponent, {
-      width: '50vw',
-      height: '50vh',
+      width: '50vh',
+      // height: '80vh',
       data: {
         task: {
           name: 'testing',
@@ -80,7 +96,7 @@ export class ItemCardListComponent {
         x.description = result.task.description;
         x.image = result.task.image;
         x.imageArray = result.task.imageArray;
-        this.fbS.createCustomDoc(this.address,x);
+        this.fbS.createCustomDoc(this.address, x);
       });
   }
 

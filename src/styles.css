@@ -128,12 +128,12 @@ body {
     align-items: center;
     overflow: hidden;
     /* background-color: red; */
-    box-shadow: var(--boxShadow3)
+    /* box-shadow: var(--boxShadow3) */
 }
 
 .itemCardImg {
     height: auto;
-    width: 100%;
+    width: auto;
 }
 
 .itemImageFrame {
@@ -322,6 +322,7 @@ body {
 .itemCardGrid3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap:2%;
 }
 
 .itemCardGrid4 {
@@ -368,7 +369,7 @@ body {
     padding-right: 5%;
     padding-left: 5%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .flexEven {
@@ -388,6 +389,10 @@ body {
 
 .flex {
     display: flex;
+}
+.flexV {
+    display: flex;
+    flex-direction: column;
 }
 
 .keyValue {

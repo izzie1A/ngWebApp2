@@ -8,7 +8,7 @@ import { FirebaseControlService, tItem } from "src/app/services/firebase-control
 })
 
 export class PageControlComponent {
-  address: string = 'citiesloreamCollection';
+  address: string = 'loreamFolder';
   itemArray: any = [];
   itemCardArrayContainer: any = [];
   

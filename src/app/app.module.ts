@@ -59,8 +59,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-
-    // provideFirebaseApp(() => initializeApp({ "projectId": "camera-af868", "appId": "1:129701599624:web:f82d68526c4342ca7f823d", "databaseURL": "https://camera-af868-default-rtdb.firebaseio.com", "storageBucket": "camera-af868.appspot.com", "locationId": "us-central", "apiKey": "AIzaSyAn4xbkq-uPWA7PZzbfJO1FJv1AWvrmYLY", "authDomain": "camera-af868.firebaseapp.com", "messagingSenderId": "129701599624", "measurementId": "G-LEX6P2PGG9" })),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
     provideFirestore(() => getFirestore()),
@@ -72,7 +70,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DragDropModule,
     MatDialogModule,
     FormsModule,
-
   ],
   providers: [
     ScreenTrackingService,

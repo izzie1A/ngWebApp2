@@ -1,21 +1,11 @@
 <div class="itemCard itemCardMargin" cdkDrag>
-    <div class="itemCardHeader flexBetween" cdkDragHandle>
-        <div>
-            <button class="itemButton">
-                <span class="material-symbols-outlined">
-                    drag_handle
-                </span>
-            </button>
-        </div>
+    <div class="itemCardHeader flexBetween">
+        <div></div>
+
         <div class="itemCardImageFrameContent2 itemCardPadding ">
             <button class="itemButton" (click)="editTask()">
                 <span class="material-symbols-outlined">
                     edit
-                </span>
-            </button>
-            <button class="itemButton" (click)="deleteFile(address,item.id)">
-                <span class="material-symbols-outlined">
-                    delete
                 </span>
             </button>
         </div>
@@ -24,9 +14,10 @@
     <div id="viewmode1">
         <div class="itemCardBody flex">
             <div class="itemCardImageFrame flexCenter">
-                <img class="itemImageFrameImage2" src="{{item.image}}">
+                <!-- <img class="itemImageFrameImage2" src="{{item.image}}"> -->
                 <img class="itemCardImage" src="{{item.image}}">
             </div>
+
             <div class="x">
                 <div class="itemCardImageFrameContent3 itemCardPadding ">
                     <button class="itemButton" (click)="deleteFile(address,item.id)">
@@ -35,11 +26,6 @@
                         </span>
                     </button>
                     <div class="flex">
-                        <button class="itemButton">
-                            <span class="material-symbols-outlined">
-                                expand
-                            </span>
-                        </button>
                         <button class="itemButton" (click)="editTask()">
                             <span class="material-symbols-outlined">
                                 edit
@@ -62,17 +48,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="itemCard flexEven">
-                    <div class="itemImageFrame" *ngFor="let x of item.imageArray">
+                <!-- imageAray -->
+                <!-- imageAray -->
+                <div class=" itemCardGrid3 itemCardPadding">
+                    <!-- <div class="itemImageFrame" *ngFor="let x of item.imageArray" [style]="'box-shadow:none;'"> -->
+                    <div class="itemImageFrame" *ngFor="let x of item.imageArray" [style]="'box-shadow:none;'">
                         <img class="itemImageFrameImage" [src]="x">
                     </div>
                 </div>
+                <!-- imageAray -->
+                <!-- imageAray -->
+            </div>
+
+            <div class="flexList"  cdkDragHandle> 
+                <button class="itemButton" (click)="moveFile(-1)">
+                    <span class="material-symbols-outlined">
+                        arrow_drop_up
+                    </span>
+                </button>
+                <button class="itemButton">
+                    <span class="material-symbols-outlined">
+                        drag_handle
+                    </span>
+                </button>
+                <button class="itemButton" (click)="moveFile(1)">
+                    <span class="material-symbols-outlined">
+                        arrow_drop_down
+                    </span>
+                </button>
+
             </div>
         </div>
-        <!-- <div class=" flexBetween">
-            <button (click)="deleteFile(address,item.id)">del</button>
-            <button (click)="deleteFile(address,item.id)">del</button>
-        </div> -->
     </div>
     <!-- <div id="viewmode1">
         <div class="itemCardBody flex  ">

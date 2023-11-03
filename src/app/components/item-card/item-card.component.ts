@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { FirebaseControlService } from "src/app/services/firebase-control.service";
 import { AuthService } from "src/app/services/auth.service";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { ItemCardDialogComponent, TaskDialogResult } from './../../components/item-card-dialog/item-card-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-
 @Component({
   selector: 'app-item-card',
   templateUrl: './item-card.component.html',
@@ -16,13 +15,19 @@ export class ItemCardComponent {
   @Input() item: Observable<any[]> | any | undefined;
   @Input() address: string = '';
   @Input() itemCardMode: 'view' | 'viewDetail' | 'edit' | 'keyValue' = 'view';
-
+  
+  @Output() newItemEvent = new EventEmitter<number>();
   editmode: boolean = false;
   saved: boolean = false;
   backupItem: any;
 
   constructor(public fbS: FirebaseControlService, public afs: AuthService, public dialog: MatDialog) {
     this.backupItem = this.item;
+  }
+
+  // 
+  moveFile(direction:number) {
+    this.newItemEvent.emit(direction);
   }
 
   // controrl

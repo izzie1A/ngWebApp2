@@ -1,31 +1,29 @@
 <div class="itemCard itemCardMargin">
-    <div class="itemCardHeader itemCardPadding flexAround">
+    <div class="itemCardHeader itemCardPadding keyValue">
         <div>
             <h2>{{address}}</h2>
-            <button (click)="newItem(address)">add new</button>
-            <button (click)="newTask()" mat-button>
-                <mat-icon>add</mat-icon> Add Task
-            </button>
         </div>
 
         <div class="itemCardControlBar">
-            <select [style]="'width:auto'" (change)="selectCollection(selecter.value)" #selecter>
+            <select [style]="'width:40%;'" (change)="selectCollection(selecter.value)" #selecter>
                 <option>items</option>
-                <option>cities</option>
+                <option>kiki</option>
                 <option>test</option>
+                <option>loreamFolder</option>
             </select>
+
+            <button (click)="newTask()" class="itemButton itemCardPadding ">
+                <mat-icon>add</mat-icon> 
+                <b>Add Task</b>
+            </button>
         </div>
     </div>
 
-    <!-- <div class="itemCardBody " (cdkDropListDropped)="drop($event)" cdkDropList>
-        <app-item-card *ngFor="let x of itemArray" [address]="address" [item]="x"></app-item-card>
-    </div> -->
-    
-    <div class="itemCardBody "  #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"  (cdkDropListDropped)="drop($event)" cdkDropList>
-        <app-item-card *ngFor="let x of item$ | async" [address]="address" [item]="x"></app-item-card>
+    <div class="itemCardBody " #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
+        (cdkDropListDropped)="drop($event)" cdkDropList>
+        
+        <app-item-card (newItemEvent)="addItem($event,i)" [address]="address" *ngFor="let x of item$ | async ; let i = index;"
+            [item]="x">
+        </app-item-card>
     </div>
-
 </div>
-
-<!-- <button (click)="openDialog('0ms', '0ms')">Open dialog without animation</button>
-<button (click)="openDialog('3000ms', '1500ms')">Open dialog slowly</button> -->

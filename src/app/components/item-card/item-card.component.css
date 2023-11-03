@@ -38,19 +38,15 @@
     justify-content: space-around;
 }
 
-
-
 .x {
-    position: relative;
-    right: 0;
-    height: 100%;
-    width: calc(100% - 50vh);
-    z-index: 0;
+    display: none;
 }
-.y{
+
+.y {
     display: flex;
     flex-direction: column;
 }
+
 .itemCardImageFrameContent3 {
     display: none;
 }
@@ -74,7 +70,14 @@
         height: 100%;
     }
 
-    
+    .x {
+        display: block;
+        position: relative;
+        right: 0;
+        height: 100%;
+        width: calc(100% - 50vh);
+        z-index: 0;
+    }
 
 
 }
