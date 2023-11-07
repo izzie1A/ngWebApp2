@@ -213,6 +213,12 @@ export class FirebaseControlService {
 
 
   // file storage
+  async getLoadingImg(){
+    const storage = getStorage();
+    const imgRef = await ref(storage, 'gs://camera-af868.appspot.com/0material/loading.gif');
+    return imgRef
+  }
+
   async onFilePush(address: string, key: any, input: HTMLInputElement) {
     if (!input.files) return
     const files: FileList = input.files;

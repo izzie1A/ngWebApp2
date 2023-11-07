@@ -144,6 +144,9 @@
   box-shadow: var(--boxShadow);
   /* padding: 2%; */
 }
+.navTriggerArea{
+
+}
 
 
 @media only screen and (min-width: 700px) {

@@ -1,16 +1,16 @@
 <div class="itemCard itemCardMargin">
     <div class="itemCardHeader itemCardPadding keyValue">
-        <div>
+        <!-- <div>
             <h2>{{address}}</h2>
-        </div>
+        </div> -->
+        <select [style]="'width:100%;'" (change)="selectCollection(selecter.value)" #selecter>
+            <option>items</option>
+            <option>kiki</option>
+            <option>test</option>
+            <option>loreamFolder</option>
+        </select>
 
         <div class="itemCardControlBar">
-            <select [style]="'width:40%;'" (change)="selectCollection(selecter.value)" #selecter>
-                <option>items</option>
-                <option>kiki</option>
-                <option>test</option>
-                <option>loreamFolder</option>
-            </select>
 
             <button (click)="newTask()" class="itemButton itemCardPadding ">
                 <mat-icon>add</mat-icon> 

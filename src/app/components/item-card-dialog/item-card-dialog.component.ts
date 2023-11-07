@@ -52,11 +52,16 @@ export class ItemCardDialogComponent {
     const files: FileList = input.files;
     for (let i = 0; i < files.length; i++) {
       let url = address + files[i].name;
-      console.log(url);
-      console.log(files[i].name);
-      this.fbS.tt(url, files[i]).then((result: any) => {
-        this.data.task.imageArray?.push(result);
-      });
+      if (this.data.task.imageArray!) {
+        let id = this.data.task.imageArray.length
+        this.data.task.imageArray[id] = "https://firebasestorage.googleapis.com/v0/b/camera-af868.appspot.com/o/0material%2FZZ5H.gif?alt=media&token=fe0d7f19-e84b-46f6-a20f-476a19906d14&_gl=1*2k4t6d*_ga*MTc4MDIzNzU1Ni4xNjk1NjIwMTg0*_ga_CW55HF8NVT*MTY5OTI0NjM4NS42OC4xLjE2OTkyNDYzOTAuNTUuMC4w";
+        this.fbS.tt(url, files[i]).then((result: any) => {
+          this.data.task.imageArray? this.data.task.imageArray[id] = result:0;
+          // if (this.data.task.imageArray!) {
+          //   this.data.task.imageArray[id] = result;
+          // }
+        });
+      }
     }
   }
 

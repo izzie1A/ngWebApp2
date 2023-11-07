@@ -16,13 +16,13 @@
         <div class=" itemCardImageContainer itemCardKeytValue">
             <div class="flexList">
                 <a class="itemCardContent">Image</a>
-                <button class="upload-btn-wrapper ">
+                <!-- <button class="upload-btn-wrapper ">
                     <span class="material-symbols-outlined">
                         cloud_upload
                     </span>
                     <input class="fileInput" type="file"
                         (change)="onImageSelect( 'loreamFolder/','imageArray',imgListInput);" #imgListInput>
-                </button>
+                </button> -->
             </div>
             <div class="itemCard itemCardImgFrame itemCardMargin" [style]="'max-height:30vh;'">
                 <div *ngIf="data.task.image == ''">
@@ -47,8 +47,6 @@
 
         <!-- imageArray -->
         <!-- imageArray -->
-
-
         <div class="itemCardImageContainer itemCardKeytValue itemCardPadding" *ngIf="data.task.imageArray!!">
             <div class="flexList itemCardPadding">
                 <a class="itemCardContent"> Image list</a>
@@ -58,20 +56,17 @@
                         (change)="onFileArrayPush( 'loreamFolder/','imageArray',imgListImgInput);" multiple
                         #imgListImgInput>
                 </button>
-                <!-- <a class="itemCardContent">Upload</a> -->
             </div>
             <div class="itemCard">
                 <div class="itemCardHeader">
                     <br>
                 </div>
-
-                <!-- <div class="itemCardImageFrameList" cdkDropList> -->
                 <div class="" (cdkDropListDropped)="localArrayDrop($event)" cdkDropListOrientation="vertical"
                     [cdkDropListData]="data.task.imageArray" cdkDropList [style]="'max-height:20vh;overflow-y:scroll;'">
                     <div class="flexBetween" *ngFor="let x of data.task.imageArray ; let i = index" cdkDrag>
                         <div class="flex">
                             <button class="itemButton" (click)="onFileDelete($event,data.task,'imageArray',i)">
-                                <span class="material-symbols-outlined" >
+                                <span class="material-symbols-outlined">
                                     cancel
                                 </span>
                             </button>
@@ -79,7 +74,7 @@
                                 <img class="itemImageFrameImage" src="{{x}}">
                             </div>
                             <button class="itemButton ">
-                                <span class="material-symbols-outlined" >edit</span>
+                                <span class="material-symbols-outlined">edit</span>
                                 <a>Edit</a>
                             </button>
                         </div>

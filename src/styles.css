@@ -18,6 +18,7 @@ body {
     --lightBlue: #8da9c4;
     --lightGray: #cccccc;
     --dark: #4d4d4d;
+    --darkBlue: #000925;
 
     --seaSick: #e9e8e2;
     --sickSea: var(--dark);
@@ -133,7 +134,7 @@ body {
 
 .itemCardImg {
     height: auto;
-    width: auto;
+    max-width: 100%;
 }
 
 .itemImageFrame {
