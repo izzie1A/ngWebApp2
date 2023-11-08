@@ -49,7 +49,6 @@ body {
 }
 
 
-
 ::-webkit-scrollbar {
     width: 1em;
 }
@@ -116,20 +115,14 @@ body {
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    /* padding: 0.5%; */
 }
 
 /* Itemcard image */
-/* Itemcard image */
 .itemCardImgFrame {
-    /* height: 50%; */
-    /* width: auto; */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    /* background-color: red; */
-    /* box-shadow: var(--boxShadow3) */
 }
 
 .itemCardImg {
@@ -184,11 +177,7 @@ body {
 }
 
 
-
-
 .itemCardImageContainer {}
-
-
 
 
 .imageFramePannel {
@@ -260,14 +249,12 @@ body {
 }
 
 /* text style */
-/* text style */
 .itemCardTitle {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     font-size: var(--title);
     height: var(--title);
-    /* text-wrap: nowrapq; */
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -297,7 +284,6 @@ body {
 }
 
 /* lay out*/
-/* lay out*/
 .itemCardGridList {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -312,7 +298,6 @@ body {
     grid-template-columns: 31% 69%;
     align-items: center;
     justify-content: space-around;
-    /* padding: 1%; */
 }
 
 .itemCardGrid2 {
@@ -346,7 +331,6 @@ body {
     margin: 2%;
 }
 
-/* flex */
 /* flex */
 .flexStart {
     display: flex;
@@ -429,7 +413,6 @@ body {
 
 
 
-/* buttons  */
 /* buttons  */
 
 /* file upload */

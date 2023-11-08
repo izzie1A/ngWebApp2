@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
-
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +17,6 @@ export class ItemCardListComponent {
 
   item$: Observable<any[]> | undefined;
   itemArray$: Observable<any>[] = [];
-
   itemArray: any = [];
   receivedValue: string = '';
 
