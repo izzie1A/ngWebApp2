@@ -1,12 +1,12 @@
 <div>
     <div class="navBar itemCardPadding">
         <div class="navBarIconFrame flexCenter">
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined" [style]="'font-size:2ch;'">
                 domain
             </span>
             <!-- <img class="navBarIcon" src="{{iconImgURL}}"> -->
         </div>
-        <button class="navbarPopHamburgeIcon "
+        <button class="navbarPopHamburgeIcon"
             (click)="expanNavbar(navbarDiv,NavTriggerArea);navBarClick(hamburgerIconDiv);" (click)="0">
             <div class="container" #hamburgerIconDiv>
                 <div class="bar1"></div>
@@ -34,10 +34,6 @@
         </button>
     </div>
 
-    <div (click)="expanNavbar(navbarDiv,NavTriggerArea)" class="navTriggerArea " #NavTriggerArea>
-
-    </div>
-
-    <div (click)="expanNavbar(navbarDiv,NavTriggerArea);navBarClick(hamburgerIconDiv)" class="NavTriggerArea "
+    <div (click)="navBarClick(hamburgerIconDiv);expanNavbar(navbarDiv,NavTriggerArea);" class="navTriggerArea"
         #NavTriggerArea></div>
 </div>

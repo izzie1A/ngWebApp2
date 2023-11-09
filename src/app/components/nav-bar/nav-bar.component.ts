@@ -20,9 +20,10 @@ export class NavBarComponent {
     this.itemArray.push(new navItem('Setting','setting','setting'));
     this.itemArray.push(new navItem('Neeeew :-)','pageControl','pageControl'));
   }
+
   expanNavbar(inputDiv: any,triggerArea:any) {
     inputDiv.style.height = this.navExpanded ? '0px' : 'auto';
-    // triggerArea.style.height = this.navExpanded ? '0vh' : '100vh';
+    triggerArea.style.height = this.navExpanded ? '0vh' : '100vh';
     inputDiv.style.opacity  = this.navExpanded ? '0' : '1';
     this.navExpanded = this.navExpanded ? false : true;
   }
@@ -30,7 +31,6 @@ export class NavBarComponent {
   navBarClick(inputDiv: any) {
     inputDiv.classList.toggle("change");
   }
-
 }
 
 

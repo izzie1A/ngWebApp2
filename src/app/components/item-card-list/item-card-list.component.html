@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="itemCardBody " #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
+    <div class="itemCardBody flexList" #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
         (cdkDropListDropped)="drop($event)" cdkDropList>
         
         <app-item-card (newItemEvent)="addItem($event,i)" [address]="address" *ngFor="let x of item$ | async ; let i = index;"

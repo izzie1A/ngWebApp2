@@ -10,40 +10,39 @@ import { ReturnStatement } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
-  fakeUser:any = {
-    // uid:faker.string.uuid(),
+  fakeUser: any = {
+    // uid:annomanm,
     // name:'fake'+faker.person.firstName(),
   }
-  storeUser:any;
+  storeUser: any;
 
   userSubscription: Subscription;
   authState$ = authState(this.auth);
 
-  serverResponse:string = '';
+  serverResponse: string = '';
 
   constructor() {
     this.userSubscription = this.user$.subscribe((aUser: User | null) => {
       if (aUser != null) {
         console.log(aUser.email);
         this.storeUser = aUser;
-      } else if(aUser == null){
+      } else if (aUser == null) {
         console.log('No user login');
         this.storeUser = this.fakeUser;
       };
-    })  
-    // this.emailRegister('izzie0082004@gmail.com','abc123','abc123');
+    })
   }
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
-  getUserID(){
-    let x = this.storeUser.uid!!? this.storeUser.uid: this.fakeUser.uid;
-    return  x ;
+  getUserID() {
+    return this.storeUser.uid!! ? this.storeUser.uid : this.fakeUser.uid;
   }
 
   checkRegisterValid(email: string) {
@@ -53,19 +52,22 @@ export class AuthService {
   }
 
   emailRegister(email: string, password: string, password2: string) {
-    if (password == password2) {
-      if (this.checkRegisterValid(email)!!) {
+    console.log("start")
+    if (password === password2) {
+      console.log("start yes")
+      console.log(this.checkRegisterValid(email))
+      if (this.checkRegisterValid(email!!)) {
+        console.log("start yes  yes")
         createUserWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-          // Signed in 
+          console.log("start yes  yes")
           const user = userCredential.user;
-          console.log(user)
-          // ...
+          console.warn(user)
         })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            this.serverResponse = error.code;
-            // ..
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          this.serverResponse = error.code;
+          alert(errorMessage);
           });
       }
     }
@@ -75,12 +77,15 @@ export class AuthService {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        console.warn(user);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         this.serverResponse = error.code;
+        alert(errorMessage);
+        console.warn(errorMessage);
       });
 
   }
@@ -122,7 +127,7 @@ export class AuthService {
         const credential = FacebookAuthProvider.credentialFromError(error);
       });
   }
-
+  // github not yet verify
   gitHUbSignin() {
     const provider = new GithubAuthProvider();
     signInWithPopup(this.auth, provider)
@@ -146,7 +151,6 @@ export class AuthService {
         // ...
       });
   }
-
 
   signout() {
     const auth = getAuth();

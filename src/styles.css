@@ -21,7 +21,7 @@ body {
     --darkBlue: #000925;
 
     --seaSick: #e9e8e2;
-    --sickSea: var(--dark);
+    --sickSea: var(--dark);     
 
     --main: var(--deepBlue);
     --mainText: var(--seaSick);
@@ -331,6 +331,10 @@ body {
     margin: 2%;
 }
 
+.center{
+    align-items: center;
+    justify-content: center;
+}
 /* flex */
 .flexStart {
     display: flex;

@@ -1,64 +1,50 @@
-.itemCard{
+:root{
+    --itemHeeight: 10ch;
 }
-.itemCardImageFrame {
-    /* width: 100%;
-    max-width: 60vh;
-    height: 50vw;
-    max-height: 50vh; */
-    /* z-index: 1; */
-    position: relative;
-    width:60vmax ;
+.itemCard {
+    /* min-width: 0px;
+    width: 50vmin;
     max-width: 100%;
-    /* height:  60vmin; */
-    max-height:  60vmax;
-    /* background-color: var(--darkBlue); */
+    max-height: 50vmin; */
+    position: relative;
+    /* max-height: 50vh; */
+}
+.itemCardBody {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: var(--imgL);
+    position: relative;
+    overflow: hidden;
+}
 
+.itemCardImageFrame {
+    background-color: blue;
+    /* height: 30vmin; */
+    position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
+    height: var(--imgL);
 }
 
-.itemCardImage{
-    /* max-height: 100%; */
+.itemCardImage {
     max-width: 100%;
+    height: auto;
 }
 
-.x {
-    display: none;
-}
-
-.y {
-    display: flex;
-    flex-direction: column;
-}
 .itemCardImageFrameContent {
     position: relative;
-    right: 0;
-    width: calc(100% - 20vh);
-    z-index: 0;
-    max-height: 40vh;
-}
-
-.itemCardImageFrameContent2 {
-    color: wheat;
-    width: max-content;
-    display: flex;
-    width: auto;
-    justify-content: space-around;
-}
-.itemCardImageFrameContent3 {
-    display: none;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    height: 100%;
+    height: var(--itemHeeight);
 }
 
 @media only screen and (min-width: 600px) {
-    .itemCardImageFrameContent {
-        /* display: flex; */
-    }
+    .itemCardImageFrameContent {}
 
-    .itemCardImageFrameContent2 {
-        display: none;
-    }
+    .itemCardImageFrameContent2 {}
 
     .itemCardImageFrameContent3 {
         display: flex;
@@ -67,12 +53,10 @@
         height: 100%;
     }
 
-    .x {
-
+    .itemCard {
+        min-width: 600px;
+        width: 40vw;
     }
-
 }
 
-@media only screen and (min-width: 700px) {
-
-}
+@media only screen and (min-width: 1500px) {}

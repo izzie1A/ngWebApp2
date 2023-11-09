@@ -7,13 +7,9 @@
 }
 
 .navBarIconFrame {
-  /* width: 5vw;
-  height: 5vw; */
-
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
 }
 
 .navBarIcon {
@@ -46,9 +42,7 @@
   display: flex;
   padding: 0.5%;
   margin: 0.5%;
-
   font-size: var(--context);
-
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -58,8 +52,6 @@
   user-select: none;
   -webkit-user-select: none;
   width: auto;
-
-
 }
 
 .navBarButton:active {
@@ -74,7 +66,7 @@
 
 .navBarButton:hover {
   box-shadow: 0px 0.5pc 0px var(--sub);
-  color: var(--green);
+  color: var(--sub);
 }
 
 
@@ -82,8 +74,6 @@
   all: unset;
   width: 100px;
   height: 100px;
-  /* width: 10vw;
-  height: 10vw; */
   color: white;
   display: flex;
   align-items: center;
@@ -92,7 +82,9 @@
 
 }
 .navbarPopHamburgeIcon:active {
-  background-color: var(--dark);
+  background-color: rgba(6, 24, 44, 0.4);
+  color: var(--yellow);
+  /* background-color: var(--dark); */
 }
 
 .navbarPopHamburgeIcon:focus {
@@ -132,20 +124,22 @@
 .hideNavbbar {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   width: 100%;
   overflow: hidden;
-  height: auto;
+  height: 0px;
   position: absolute;
   z-index: 2;
   background-color: var(--seaSick);
   transition-duration: 0.7s;
   opacity: 0;
   box-shadow: var(--boxShadow);
-  /* padding: 2%; */
 }
 .navTriggerArea{
-
+  width: 100vw;
+  height:0vh;
+  position: fixed;
+  top:0;
+  z-index: 1;
 }
 
 
@@ -173,7 +167,5 @@
 
 @media only screen and (min-width: 1500px) {
   .navBar {
-    /* display: flex;
-    flex-direction: column; */
   }
 }
