@@ -6,6 +6,7 @@ import { Auth, user, authState } from '@angular/fire/auth';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Observable } from 'rxjs/internal/Observable';
 import { ReturnStatement } from '@angular/compiler';
+import { flatMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class AuthService {
     this.userSubscription = this.user$.subscribe((aUser: User | null) => {
       if (aUser != null) {
         console.log(aUser.email);
+        console.log(aUser);
         this.storeUser = aUser;
       } else if (aUser == null) {
         console.log('No user login');
@@ -51,32 +53,35 @@ export class AuthService {
     return result;
   }
 
-  emailRegister(email: string, password: string, password2: string) {
+  emailRegister(email: string, password: string) {
     console.log("start")
-    if (password === password2) {
-      console.log("start yes")
-      console.log(this.checkRegisterValid(email))
-      if (this.checkRegisterValid(email!!)) {
-        console.log("start yes  yes")
-        createUserWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-          console.log("start yes  yes")
-          const user = userCredential.user;
-          console.warn(user)
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          this.serverResponse = error.code;
-          alert(errorMessage);
-          });
-      }
-    }
+    if (this.checkRegisterValid(email) == false) return
+
+    return createUserWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
+      console.log("start yes  yes")
+      const user = userCredential.user;
+      console.warn(user)
+      return user;
+    })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        this.serverResponse = error.code;
+        console.warn(errorMessage);
+        // Firebase: Password should be at least 6 characters (auth/weak-password).
+        return error.message;
+      });
   }
   emailSignIn(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        const data = {
+          uid: user.uid,
+          email: user.email,
+        }
+        console.warn(data);
         console.warn(user);
         // ...
       })

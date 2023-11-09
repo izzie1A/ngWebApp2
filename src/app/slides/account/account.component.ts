@@ -23,10 +23,11 @@ export class AccountComponent {
   emailVerification(email: string, password: string){
     
   }
-  emailRegister(email: string, password1: string, password2: string) {
+  async emailRegister(email: string, password1: string, password2: string) {
     let x = this.isRegisterValidate({ email: email });
     if (x != null && password1 == password2) {
-      this.authS.emailRegister(email,password1,password2);
+      let e = await this.authS.emailRegister(email,password1);
+      console.log(e)
     }
   }
   emailSignin(email: string, password: string){

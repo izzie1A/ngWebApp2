@@ -1,10 +1,11 @@
 .userImageFrame {
   border-radius: 1000px;
+  height: var(--imgM);
+  width: var(--imgM);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-
   /* width: 10vmin;
   height: 10vmin; */
 

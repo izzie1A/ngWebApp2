@@ -88,19 +88,20 @@
 <!-- login view -->
 <div class="itemCard itemCardMargin " *ngIf="this.authS.user$ |async as user">
     <div class="itemCardHeader flexBetween itemCardPadding">
-        <b>{{user.displayName}}</b>
+        <b *ngIf="user.displayName != null">{{user.displayName}}</b>
+        <b *ngIf="user.displayName == null">{{user.email}}</b>
         <div class="itemCardHeaderControlBar">
             <button (click)="this.authS.signout()" class="itemButton flexAround">
                 <span class="material-symbols-outlined ">LogOut</span>
             </button>
-        </div>
     </div>
+</div>
     <div class="itemCardSholder">
     </div>
 
     <div class="itemCardBody ">
-        <div class="">
-            <div class="userImageFrame ">
+        <div class="itemCardGrid3 center itemCardPadding">
+            <div class="userImageFrame">
                 <img src={{user.photoURL}} class="userImage" alt="img">
             </div>
             <div class="">
@@ -108,12 +109,12 @@
                 <h2> {{user.displayName}}</h2>
             </div>
         </div>
-        <div class="flexAround itemCardPadding">
+        <div class="flexBetween itemCardPadding">
+            <div></div>
             <button (click)="this.authS.signout()" class=" itemImageButton flexAround">
                 <span class="material-symbols-outlined ">LogOut</span>
                 LogOut
             </button>
-            <div></div>
         </div>
     </div>
 
