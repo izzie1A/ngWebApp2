@@ -29,6 +29,8 @@ export class AccountComponent {
     if (x != null && password1 == password2) {
       this.registerLog = await this.authS.emailRegister(email,password1);
       console.log(this.registerLog)
+    }else{
+      this.registerLog = "Please enter valid email address"
     }
   }
   emailSignin(email: string, password: string){
