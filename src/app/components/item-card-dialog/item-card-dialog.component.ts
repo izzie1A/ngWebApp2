@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { fItem } from "src/app/services/firebase-control.service";
-import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FirebaseControlService, firebaseItemCard, FireItemCard, tItem } from "src/app/services/firebase-control.service";
 
 @Component({
   selector: 'app-item-card-dialog',
@@ -16,11 +16,11 @@ export class ItemCardDialogComponent {
     private fbS: FirebaseControlService,
     public dialogRef: MatDialogRef<ItemCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData
-  ) { }
+  ) {
+   }
 
 
   localArrayDrop(event: CdkDragDrop<any[]> | any): void {
-    console.log(event);
     if (event.previousContainer === event.container) {
       // const item = event.previousContainer.data[event.previousIndex];
       // const item = event.previousContainer.data[event.previousIndex];

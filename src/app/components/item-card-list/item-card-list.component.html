@@ -1,15 +1,19 @@
-<div class="itemCard itemCardMargin">
+<!-- {{userCredit.uid}} -->
+
+<div class="itemCard itemCardMargin" [style]="'box-shadow:none;'">
     <div class="itemCardHeader itemCardPadding keyValue">
-        <!-- <div>
-            <h2>{{address}}</h2>
-        </div> -->
         <select [style]="'width:100%;'" (change)="selectCollection(selecter.value)" #selecter>
+            <option  value="yey">
+                <div class="flex" >
+                    <a>tet</a>
+                </div>
+            </option>
             <option>items</option>
             <option>kiki</option>
             <option>test</option>
             <option>loreamFolder</option>
+            <option>userTest</option>
         </select>
-
         <div class="itemCardControlBar">
 
             <button (click)="newTask()" class="itemButton itemCardPadding ">
@@ -17,11 +21,11 @@
                 <b>Add Task</b>
             </button>
         </div>
+
     </div>
 
-    <div class="itemCardBody flexList" #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
+    <div class="listBody" #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
         (cdkDropListDropped)="drop($event)" cdkDropList>
-        
         <app-item-card (newItemEvent)="addItem($event,i)" [address]="address" *ngFor="let x of item$ | async ; let i = index;"
             [item]="x">
         </app-item-card>

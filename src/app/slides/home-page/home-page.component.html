@@ -1,13 +1,17 @@
-<div class="" [style]="'padding-left:10%;padding-right:10%;'">
+<div  [style]="'padding-left:10%;padding-right:10%;'">
     <div class="itemCard itemCardMargin" *ngFor=" let x of itemArray">
         <div class="itemCardBody">
-            <div class="itemCardImageFrame" *ngFor=" let y of x.imageArray">
-                <img src="{{y}}" class="itemCardImage">
+            <img [src]="x.image" class="itemCardImage">
+            <!-- <img [src]="x.imageArray[0]" class="itemCardImage"> -->
+        </div>
+        <div class="flexBetween">
+            <div class=" itemCardPadding">
+                <b>{{x.name}}</b>
+                <p>{{x.description}}</p>
+            </div>
+            <div class="flexList itemCardPadding">
+                <button class="itemImageButton" >asd</button>
             </div>
         </div>
-        <div class="itemCardHeader itemCardPadding">
-            <p>{{x.name}}</p>
-        </div>
     </div>
-
 </div>

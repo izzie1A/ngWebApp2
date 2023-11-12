@@ -1,37 +1,27 @@
 <div class="itemCard" cdkDrag>
-    <div class="itemCardHeader flexBetween itemCardPadding" cdkDragHandle>
-        <div class=" ">
-            <span class="material-symbols-outlined" [style]="'font-size:2ch;'">
+    <div class=" flexBetween itemCardPadding">
+        <div class=" " >
+            <span class="material-symbols-outlined" [style]="'font-size:2ch;'" cdkDragHandle>
                 drag_handle
             </span>
             <b>{{item.name}}</b>
         </div>
-        <div>
-            <button class="itemButton" (click)="editTask()">
-                <span class="material-symbols-outlined" [style]="'font-size:2ch;'">
-                    edit
-                </span>
-            </button>
-        </div>
+        <button class="itemButton" (click)="editTask()">
+            <span class="material-symbols-outlined" [style]="'font-size:2ch;'">
+                edit
+            </span>
+        </button>
     </div>
     <div class="itemCardBody">
-        <div class="">
-            <div class="itemCardImageFrame">
-                <img class="itemCardImage" src="{{item.image}}">
-                <img class="itemCardImage" *ngIf="item.image == ''" src="{{item.imageArray[0]}}">
-                <div *ngIf=" item.image == '' &&  item.imageArray[0] == '' ">
-                    MEow
-                    <br>
-                </div>
-            </div>
-        </div>
-        <div class="itemCardImageFrameContent itemCardPadding">
+        
+        <!-- <div class="itemCardImageFrame">
+            <img class="itemCardImage" *ngIf="item.image == ''" src="{{item.imageArray[0]}}">
+        </div> -->
+        <!-- <div class="itemCardImageFrameContent itemCardPadding">
             <a>asd</a>
             <b>asd</b>
-        </div>
+        </div> -->
     </div>
-
-
 </div>
 <!-- <div id="viewmode1">
     <div class="itemCardBody flex">

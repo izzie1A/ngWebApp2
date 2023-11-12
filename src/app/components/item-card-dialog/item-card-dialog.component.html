@@ -1,81 +1,40 @@
-<div class="itemCard">
+<div class="itemCard" [style]="'border-radius:0px;'">
     <div class="itemCardHeader">
         <br>
     </div>
     <div class="itemCardBody itemCardPadding">
-        <div class="itemCardGrid2">
+        <div class="itemCardGrid text" [style]="'font-size:var(--title)'">
             <a>Name</a>
             <input [(ngModel)]="data.task.name">
 
-            <a>description</a>
+            <a>Description</a>
             <input [(ngModel)]="data.task.description">
         </div>
-
-        <!-- image -->
-        <!-- image -->
-        <div class=" itemCardImageContainer itemCardKeytValue">
-            <div class="flexList">
-                <a class="itemCardContent">Image</a>
-                <!-- <button class="upload-btn-wrapper ">
-                    <span class="material-symbols-outlined">
-                        cloud_upload
-                    </span>
-                    <input class="fileInput" type="file"
-                        (change)="onImageSelect( 'loreamFolder/','imageArray',imgListInput);" #imgListInput>
-                </button> -->
-            </div>
-            <div class="itemCard itemCardImgFrame itemCardMargin" [style]="'max-height:30vh;'">
-                <div *ngIf="data.task.image == ''">
-                    <button class="upload-btn-wrapper ">
-                        <span class="material-symbols-outlined">
-                            cloud_upload
-                        </span>
-                        <input class="fileInput" type="file"
-                            (change)="onImageSelect( 'loreamFolder/','imageArray',imgListInput);" #imgListInput>
-                    </button>
-                </div>
-                <img class="itemCardImg" src="{{data.task.image}}">
-                <div class="itemCardImageEditPanel" *ngIf="data.task.image != ''">
-                    <button class="material-symbols-outlined itemImageButton"
-                        (click)="onImageUnselect($event,data.task,'image')">delete</button>
-                </div>
-                <!-- <img class="itemImageFrameImage" src="{{data.task.image}}"> -->
-            </div>
-        </div>
-        <!-- image -->
-        <!-- image -->
-
         <!-- imageArray -->
-        <!-- imageArray -->
-        <div class="itemCardImageContainer itemCardKeytValue itemCardPadding" *ngIf="data.task.imageArray!!">
+        <div class=" itemCardImageContainer itemCardKeytValue itemCardPadding itemCardMargin"
+            *ngIf="data.task.imageArray!!">
             <div class="flexList itemCardPadding">
-                <a class="itemCardContent"> Image list</a>
-                <button class="upload-btn-wrapper ">
-                    <span class="material-symbols-outlined">cloud_upload</span>
+                <button class="upload-btn-wrapper">
+                    <span class="material-symbols-outlined" [style]="'font-size:var(--title)'">cloud_upload</span>
                     <input class="fileInput" type="file"
                         (change)="onFileArrayPush( 'loreamFolder/','imageArray',imgListImgInput);" multiple
                         #imgListImgInput>
                 </button>
             </div>
-            <div class="itemCard">
-                <div class="itemCardHeader">
-                    <br>
-                </div>
-                <div class="" (cdkDropListDropped)="localArrayDrop($event)" cdkDropListOrientation="vertical"
-                    [cdkDropListData]="data.task.imageArray" cdkDropList [style]="'max-height:20vh;overflow-y:scroll;'">
-                    <div class="flexBetween" *ngFor="let x of data.task.imageArray ; let i = index" cdkDrag>
-                        <div class="flex">
+            <div class="">
+                <div class="itemCardGrid2" (cdkDropListDropped)="localArrayDrop($event)"
+                    cdkDropListOrientation="vertical" [cdkDropListData]="data.task.imageArray" cdkDropList
+                    [style]="'max-height:50vh;overflow-y:scroll;'">
+                    <div class="itemImageFrame" *ngFor="let x of data.task.imageArray ; let i = index" cdkDrag>
+                        <img class="itemImageFrameImage" src="{{x}}" [style]="''">
+                        <div class="itemCardImageEditPanel">
+                            <div class="flexCenter">
+                                <span class="material-symbols-outlined" cdkDragHandle>drag_handle</span>
+                            </div>
                             <button class="itemButton" (click)="onFileDelete($event,data.task,'imageArray',i)">
                                 <span class="material-symbols-outlined">
                                     cancel
                                 </span>
-                            </button>
-                            <div class="itemImageFrame">
-                                <img class="itemImageFrameImage" src="{{x}}">
-                            </div>
-                            <button class="itemButton ">
-                                <span class="material-symbols-outlined">edit</span>
-                                <a>Edit</a>
                             </button>
                         </div>
                         <div class="flex itemCardPadding">
@@ -86,31 +45,29 @@
                     </div>
                 </div>
             </div>
-            <!-- imageArray -->
-            <!-- imageArray -->
         </div>
     </div>
-
+    <!-- dialog controlbar -->
     <div class="itemCardPadding">
         <div class="flexBetween itemCardPadding">
+            <button mat-button [mat-dialog-close]="{ task: data.task, delete: true }" [style]="'color: red;'">
+                <a>Delete</a>
+                <mat-icon>delete</mat-icon>
+            </button>
             <div>
-                <button mat-button [mat-dialog-close]="{ task: data.task, delete: true }">
-                    <a>DELETE</a>
-                    <mat-icon>delete</mat-icon>
-                </button>
                 <button mat-button (click)="cancel()">
                     <a>Cancel</a>
                     <mat-icon>cancel</mat-icon>
                 </button>
+                <button mat-button [mat-dialog-close]="{ task: data.task }">
+                    <a>Save</a>
+                    <mat-icon>save</mat-icon>
+                </button>
+                <button *ngIf="data.enableDelete" mat-fab color="primary" aria-label="Delete"
+                    [mat-dialog-close]="{ task: data.task, delete: true }">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
-            <button mat-button [mat-dialog-close]="{ task: data.task }">
-                <a>Save</a>
-                <mat-icon>save</mat-icon>
-            </button>
-            <button *ngIf="data.enableDelete" mat-fab color="primary" aria-label="Delete"
-                [mat-dialog-close]="{ task: data.task, delete: true }">
-                <mat-icon>delete</mat-icon>
-            </button>
         </div>
     </div>
 </div>

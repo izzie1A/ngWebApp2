@@ -1,11 +1,55 @@
-<div class="">
-    <div class=" itemCardPadding flexAround">
-        <h2>Page-control</h2>
-        {{address}}
+<div class="  itemCardPadding">
+    <div class="flexBetween">
+        <div class="itemCardPadding">
+            <b>Page-control</b>
+        </div>
     </div>
-    
-    <div class="itemCardBody itemCardPadding">
-         <app-item-card-list  [address]="address"></app-item-card-list>
-        <!-- <app-item-card *ngFor="let x of itemArray" [item]="x" ></app-item-card> -->
+
+    <div class=" itemCard">
+        <div class="itemCardHeader itemCardPadding flexBetween">
+            <div class="flex" *ngIf="userName | async as user">
+                <img class="itemCardIconFrame itemCardMargin" [src]="user.photoURL">
+                <a class="itemCardPadding">{{user.displayName}}</a>
+            </div>
+            <div class="">
+                <button (click)="newTask()" class="itemButton" [style]="'font-size:var(--title);'">
+                    <span class="material-symbols-outlined" [style]="'font-size:var(--title);'">
+                        add
+                    </span>
+                    <b>New</b>
+                </button>
+            </div>
+        </div>
+
+        <div class="itemCardBody itemCardGrid">
+            <div class="listBody" #{{address}}="cdkDropList" id="{{address}}" [cdkDropListData]="item$ | async"
+                (cdkDropListDropped)="drop($event)" cdkDropList>
+                <app-item-card (newItemEvent)="addItem($event,i)" 
+                (click)="selectItemCard(x)"
+                [address]="address"
+                    *ngFor="let x of item$ | async ; let i = index;" [item]="x">
+                </app-item-card>
+            </div>
+            <div class="itemCard itemCardMargin" >
+                <div class="itemCardBody itemCardPadding">
+                    <div class="x">
+                        <b class="content">Description</b>
+                        <a class="itemCardPadding keyValue">{{itemCardViewer?.id}}</a>
+                        <b class="content">image</b>
+                        <a class="itemCardPadding keyValue">{{itemCardViewer?.mediaMeta?.imageURL }}</a>
+                        <b class="content">Description</b>
+                        <a class="itemCardPadding keyValue">dddddddddddddddddd</a>
+                        <b class="content">Description</b>
+                        <a class="itemCardPadding keyValue">dddddddddddddddddd</a>
+                    </div>
+                </div>
+                <div class="itemCardHeader itemCardPadding">
+                    <div class="x">
+                        <b class="content">Description</b>
+                        <a class="itemCardPadding keyValue">meowemwoe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

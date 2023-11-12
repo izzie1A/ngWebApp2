@@ -12,18 +12,8 @@ export class AccountComponent {
   registerLog:string|undefined;
 
   constructor(public authS: AuthService) {
-    const user = this.authS.authState$;
-
-    let x = this.isRegisterValidate({ email: 'meow0082005@gmail.com' });
-    console.log(x)
   }
 
-  login() {
-    this.authS.googleSignin();
-  }
-  emailVerification(email: string, password: string){
-    
-  }
   async emailRegister(email: string, password1: string, password2: string) {
     let x = this.isRegisterValidate({ email: email });
     if (x != null && password1 == password2) {
@@ -35,7 +25,7 @@ export class AccountComponent {
   }
   emailSignin(email: string, password: string){
     if(email!= "" && password!=""){
-      console.log(email,password)
+      console.log("sign in ",email,password)
       this.authS.emailSignIn(email,password);
     }else{
       alert();

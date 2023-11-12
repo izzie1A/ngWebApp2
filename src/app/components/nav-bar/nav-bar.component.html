@@ -27,8 +27,8 @@
     <div class="hideNavbbar" #navbarDiv>
         <button *ngFor="let x of itemArray" class="navBarButton" routerLink="/{{x.url.toString()}}"
             (click)="expanNavbar(navbarDiv,NavTriggerArea);navBarClick(hamburgerIconDiv)"
-            [style.color]="'var(--subText)'">
-            <a class="navBarButtonText">
+            [style.color]="'var(--title)'">
+            <a class="">
                 {{x.displayName}}
             </a>
         </button>

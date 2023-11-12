@@ -31,15 +31,15 @@ body {
     --bg: var(--white);
     --histarri: var(--yellow);
 
-    --title: 24px;
-    --context: 15px;
+    --title: 2ch;
+    --context: 1ch;
     --keyValue: 12px;
 
     --screenS: 700px;
     --screenM: 1200px;
     --screenL: 2000px;
 
-    --imgS: 12px;
+    --imgS: 4ch;
     --imgM: 120px;
     --imgL: 240px;
 
@@ -132,8 +132,8 @@ body {
 
 .itemImageFrame {
     position: relative;
-    height: 5vh;
-    width: 5vh;
+    /* height: 5vh; */
+    /* width: 5vh; */
     margin: 1%;
     border-radius: 10px;
     position: relative;
@@ -197,6 +197,11 @@ body {
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
     overflow: hidden;
+}
+
+.itemCardIconFrame{
+    border-radius: 100vmax;
+    height:var(--imgS)
 }
 
 
@@ -379,25 +384,7 @@ body {
 .flex {
     display: flex;
 }
-.flexV {
-    display: flex;
-    flex-direction: column;
-}
-
-.keyValue {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    align-content: center;
-    justify-content: space-around;
-    /* box-shadow: rgb(51, 51, 51) 0px 0.125rem 3px 0px; */
-    /* margin-bottom: 2%; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
 /* backend */
-
 .itemCardBack {
     width: 100%;
     /* min-height: 80px; */
@@ -506,11 +493,11 @@ body {
 }
 
 .itemButton:active {
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5ch 0px 0px;
 }
 
 .itemButton:focus {
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5vh 0px 0px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0.5ch 0px 0px;
     color: var(--yellow);
 }
 
@@ -541,8 +528,22 @@ body {
     /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px inset, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
 }
 
-
-
+/* text */
+.text{
+    text-overflow: ellipsis;
+}
+.title{
+    font-size:var(--title);
+    overflow: hidden;
+}
+.content{
+    font-size:var(--content);
+    overflow: hidden;
+}
+.keyValue{
+    font-size:var(--keyValue);
+    overflow: hidden;
+}
 
 /* 
   
@@ -585,12 +586,12 @@ body {
 
 @media only screen and (min-width: 700px) {
     :root {
-        --title: 12px;
-        --context: 12px;
+        --title: 3ch;
+        --context:2ch;
         --keyvalue: 9px;
 
-        --imgS: 12px;
-        --imgM: 120px;
+        --imgS: 6ch;
+        --imgM: 10ch;
         --imgL: 240px;
     }
 
@@ -609,7 +610,7 @@ body {
 
 @media only screen and (min-width: 1500px) {
     :root {
-        --title: 24px;
+        --title: 4ch;
         --context: 15px;
         --keyvalue: 12px;
     }

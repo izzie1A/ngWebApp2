@@ -2,18 +2,15 @@
     --itemHeeight: 10ch;
 }
 .itemCard {
-    /* min-width: 0px;
-    width: 50vmin;
-    max-width: 100%;
-    max-height: 50vmin; */
     position: relative;
-    /* max-height: 50vh; */
+    border-radius: 0px;
+    /* height: var(--imgM); */
 }
 .itemCardBody {
     height: 100%;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    height: var(--imgL);
+    /* display: grid; */
+    /* grid-template-columns:  1fr 2fr; */
+    /* height: var(--imgM); */
     position: relative;
     overflow: hidden;
 }
@@ -21,11 +18,12 @@
 .itemCardImageFrame {
     background-color: blue;
     /* height: 30vmin; */
+    /* height: 100%; */
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
-    height: var(--imgL);
+    /* height: var(--imgL); */
 }
 
 .itemCardImage {
@@ -54,8 +52,7 @@
     }
 
     .itemCard {
-        min-width: 600px;
-        width: 40vw;
+        /* min-width: 600px; */
     }
 }
 

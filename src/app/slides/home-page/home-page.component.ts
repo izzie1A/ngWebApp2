@@ -8,24 +8,16 @@ import { FirebaseControlService, tItem } from "src/app/services/firebase-control
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  address: string = 'citiesloreamCollection';
+  address: string = 'loreamFolder';
   itemArray: any = [];
-
-
-    title = 'card-board';
-
-  viewMode: 'grid' | 'list' | 'roll' = 'list'
-  viewModeA = ['grid', 'list', 'roll'];
-
-  itemCardArrayContainer: any[] = []
-
-  constructor(private fbS: FirebaseControlService) {
-    this.initialize();
-  }
-  
-  async initialize() {
-    let x = await this.fbS.queryCondition(this.address, 100, "name", "!=", 'null');
-    console.log(x);
-    this.itemArray = x;
+    title = 'Loream Home page';
+    viewMode: 'grid' | 'list' | 'roll' = 'list'
+    viewModeA = ['grid', 'list', 'roll'];
+    itemCardArrayContainer: any[] = []
+    constructor(private fbS: FirebaseControlService) {
+      this.initialize();
+    }
+    async initialize() {
+      this.itemArray = await this.fbS.queryCondition(this.address, 100, "name", "!=", 'null');
   }
 }

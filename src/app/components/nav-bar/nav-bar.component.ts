@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 export class NavBarComponent {
   title: string = "Appletwo";
-  iconImgURL: string = "https://appletwo.ca/wp-content/uploads/2023/03/AppleTwo_Full_Logo-removebg-preview.png";
+  // iconImgURL: string = "https://appletwo.ca/wp-content/uploads/2023/03/AppleTwo_Full_Logo-removebg-preview.png";
   
   navbarGidContainer: any = [];
   navExpanded = false;
@@ -24,6 +24,7 @@ export class NavBarComponent {
   expanNavbar(inputDiv: any,triggerArea:any) {
     inputDiv.style.height = this.navExpanded ? '0px' : 'auto';
     triggerArea.style.height = this.navExpanded ? '0vh' : '100vh';
+    triggerArea.style.display = this.navExpanded ? 'none' : 'flex';
     inputDiv.style.opacity  = this.navExpanded ? '0' : '1';
     this.navExpanded = this.navExpanded ? false : true;
   }

@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, collectionData, collection, updateDoc, getDocFromCache, deleteDoc } from '@angular/fire/firestore';
-import { DocumentData, WhereFilterOp, addDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, where } from "firebase/firestore";
+import { DocumentData, Timestamp, WhereFilterOp, addDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, where } from "firebase/firestore";
 // import { getStorage, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Storage, getStorage, provideStorage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, timestamp } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,22 +14,6 @@ export class FirebaseControlService {
   firebaseServerResponse: any;
 
   constructor() {
-    this.getCustomFile()
-  }
-
-  async docSave(address: string, id: string, content: any) {
-    const docRef = doc(this.firestore, address, id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document exist data:", docSnap.data());
-      return await this.updateDoc(address, id, content)
-    } else {
-      console.log("No such document! now create");
-      console.log(address, content);
-      return await setDoc(doc(this.firestore, docRef.path), content);
-      // const docRef = await addDoc(collection(this.firestore, address), content);
-      // console.log("Document written with ID: ", docRef.id);
-    }
   }
   getCustomFile() {
     const content = {
@@ -44,7 +28,6 @@ export class FirebaseControlService {
     };
     content.imageArray.push(this.ranPic());
     content.image = this.ranPic();
-
     return content
   }
   ranInt() {
@@ -56,6 +39,47 @@ export class FirebaseControlService {
     let img = "https://picsum.photos/" + r + "00/" + rx + "00";
     return img;
   }
+  async getNullDocID(addaress: string){
+    let collcetionRef = collection(this.firestore, addaress);
+    const docRef = await addDoc(collcetionRef, {});
+    return docRef.id
+  }
+  async getItemNullDoc(addaress: string, id: string) {
+    const docData = {
+      name: "Hello world!",
+      timeStamp: new Date(),
+      tag: {
+        description: null,
+        price: 5,
+        currency: "$usd",
+        itemMeta: {
+          imgMeta: {
+            imageURL: "",
+            imageArray: [],
+          },
+          describeTag: {
+            tag1: "",
+            tag2: [],
+          },
+        }
+      },
+    }
+    return docData
+  }
+
+  async docSave(address: string, id: string, content: any) {
+    const docRef = doc(this.firestore, address, id);
+    const docSnap = await getDoc(doc(this.firestore, address, id));
+    if (docSnap.exists()) {
+      console.log("Document exist data:", docSnap.data());
+      return await this.updateDoc(address, id, content)
+    } else {
+      console.log("No such document! now create");
+      console.log(address, content);
+      return await setDoc(docRef, content);
+    }
+  }
+
 
   // firestore curd
   async createCustomDoc(address: string, file: any) {
@@ -155,9 +179,6 @@ export class FirebaseControlService {
 
   // collection
   t(address: string) {
-    // const itemCollection = collection(this.firestore, 'items');
-    // return collectionData(itemCollection);
-    // const itemCollection = collection(this.firestore, 'items');
     return collectionData(collection(this.firestore, address));
   }
   getCollectionValueChange(address: string) {
@@ -177,7 +198,7 @@ export class FirebaseControlService {
     querySnapshot.forEach((doc) => {
       let x = {
         id: doc.id,
-        data: doc.data()
+        data: doc.data(),
       }
       result.push(x);
     });
@@ -213,7 +234,7 @@ export class FirebaseControlService {
 
 
   // file storage
-  async getLoadingImg(){
+  async getLoadingImg() {
     const storage = getStorage();
     const imgRef = await ref(storage, 'gs://camera-af868.appspot.com/0material/loading.gif');
     return imgRef
@@ -303,12 +324,42 @@ export class fItem extends tItem {
   }
 }
 
-class Media {
-  imageURL: string = "https://picsum.photos/200/300";
-  imageUrlArray: string[] = [this.imageURL];
+
+export interface firebaseItemCard{
+  id:string,
+  createTime:Date,
+  mediaMeta:MediaMeta,
+  infoMeta:infoMeta,
+  userMeta:userMeta,
 }
 
-class MetaData {
-  createBy: string = 'anno';
-  createTime: number = Date.now();
+export class FireItemCard{
+  id:string
+  mediaMeta:MediaMeta = new MediaMeta; 
+  infoMeta:infoMeta = new infoMeta;
+  userMeta:userMeta = new userMeta;
+  constructor(id:string){
+    this.id = id;
+  }
+  getObj(){
+    return {
+      id:this.id,
+      mediaMeta:this.mediaMeta,
+      infoMeta:this.infoMeta,
+      userMeta:this.userMeta,
+    }
+  }
+}
+class MediaMeta {
+  imageURL: string = "https://picsum.photos/200/300";
+  imageArray: string[] = [this.imageURL];
+}
+class infoMeta {
+  price: number = 0;
+  priceCurrency: string = '';
+}
+class userMeta {
+  createBy: string = '';
+  createTime:Date = new Date;
+  lastEdit: Date | undefined;
 }

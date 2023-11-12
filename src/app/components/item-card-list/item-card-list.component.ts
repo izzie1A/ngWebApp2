@@ -13,18 +13,14 @@ import { signInWithEmailAndPassword } from '@angular/fire/auth';
   styleUrls: ['./item-card-list.component.css']
 })
 export class ItemCardListComponent {
-  @Input() address: string = 'loreamFolder';
-
-  item$: Observable<any[]> | undefined;
-  itemArray$: Observable<any>[] = [];
-  itemArray: any = [];
-  receivedValue: string = '';
+  userCredit: Observable<any> | undefined;
+  address: string = 'loreamFolder';
+  item$: Observable<any[]> = this.fbS.t(this.address);
 
   constructor(private fbS: FirebaseControlService, public dialog: MatDialog) {
-    this.item$ = fbS.t(this.address);
   }
 
-  async addItem(newItem: number , num: number) {
+  async addItem(newItem: number, num: number) {
     let resultPack: string | any[] = [];
     let sub = this.item$?.subscribe((result) => {
       resultPack = result;
@@ -44,9 +40,6 @@ export class ItemCardListComponent {
     })
   }
 
-  dropMove(direction: number) {
-  }
-
   drop(event: CdkDragDrop<any[]> | any): void {
     if (event.previousContainer == event.container) {
       if (event.previousIndex === event.currentIndex) {
@@ -57,8 +50,8 @@ export class ItemCardListComponent {
       let x = item.id;
       item.id = item2.id;
       item2.id = x;
-      this.fbS.docSave(event.previousContainer.id, item2.id.toString(), item2);
       this.fbS.docSave(event.container.id, item.id.toString(), item);
+      this.fbS.docSave(event.previousContainer.id, item2.id.toString(), item2);
     }
   }
 
@@ -72,14 +65,11 @@ export class ItemCardListComponent {
 
   newTask(): void {
     const dialogRef = this.dialog.open(ItemCardDialogComponent, {
-      width: '50vh',
-      // height: '80vh',
       data: {
         task: {
-          name: 'testing',
-          description: 'testing',
+          name: '',
+          description: '',
           imageArray: [],
-          image: '',
         },
       },
     });
@@ -89,20 +79,12 @@ export class ItemCardListComponent {
         if (!result) {
           return;
         }
+        console.warn(result)
         let x = this.fbS.getCustomFile();
         x.name = result.task.name;
         x.description = result.task.description;
-        x.image = result.task.image;
         x.imageArray = result.task.imageArray;
-        this.fbS.createCustomDoc(this.address, x);
+        this.fbS.docSave(this.address,result.task.id,result.task);
       });
   }
-
-  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-  //   this.dialog.open(ItemCardDialogComponent, {
-  //     width: '250px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //   });
-  // }
 }

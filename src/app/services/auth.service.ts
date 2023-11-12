@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, User } from "firebase/auth";
 import { FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
+import { FirebaseControlService, tItem } from "src/app/services/firebase-control.service";
 import { Auth, user, authState } from '@angular/fire/auth';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Observable } from 'rxjs/internal/Observable';
@@ -15,39 +16,44 @@ import { flatMap } from 'rxjs';
 export class AuthService {
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
+  serverResponse: string = '';
   fakeUser: any = {
-    // uid:annomanm,
-    // name:'fake'+faker.person.firstName(),
   }
-  storeUser: any;
-
+  storeUser!: User;
   userSubscription: Subscription;
   authState$ = authState(this.auth);
-
-  serverResponse: string = '';
-
-  constructor() {
+  constructor(private fbS: FirebaseControlService) {
     this.userSubscription = this.user$.subscribe((aUser: User | null) => {
       if (aUser != null) {
-        console.log(aUser.email);
-        console.log(aUser);
         this.storeUser = aUser;
+        this.fbS.docSave('userTest',aUser.uid, this.loginUpdate());
       } else if (aUser == null) {
-        console.log('No user login');
         this.storeUser = this.fakeUser;
+      } else {
+        console.warn('aUser error');
       };
     })
+  }
+
+  getUserID(){
+    return this.storeUser
+  }
+
+  loginUpdate() {
+    return {
+      id: this.storeUser.uid, 
+      name: this.storeUser.displayName,
+      imageURL: this.storeUser.photoURL,
+      email: this.storeUser.email,
+      timeStamp: Date(),
+    };
   }
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
-  getUserID() {
-    return this.storeUser.uid!! ? this.storeUser.uid : this.fakeUser.uid;
-  }
-
-  checkRegisterValid(email: string) {
+  checkEmailRegisterValid(email: string) {
     const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const result: boolean = expression.test(email); // true
     return result;
@@ -55,20 +61,16 @@ export class AuthService {
 
   emailRegister(email: string, password: string) {
     console.log("start")
-    if (this.checkRegisterValid(email) == false) return
+    if (this.checkEmailRegisterValid(email) == false) return
 
     return createUserWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-      console.log("start yes  yes")
       const user = userCredential.user;
-      console.warn(user)
       return user;
     })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.serverResponse = error.code;
-        console.warn(errorMessage);
-        // Firebase: Password should be at least 6 characters (auth/weak-password).
+        this.serverResponse = error.message;
         return error.message;
       });
   }
